@@ -20,10 +20,7 @@ timer는 싱글 스레드에서 실행
 
 ### Display 위젯
 
-- QFrame → QLCDNumber
-
-              → QLabel
-
+- QFrame → QLCDNumber, QLabel
 - QWidget → QProgressBar
 - QTextEdit → QTextBrowser
 
