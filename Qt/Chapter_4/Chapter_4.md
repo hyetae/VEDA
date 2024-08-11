@@ -1,21 +1,3 @@
-# Day 18
-
-Date: 2024년 8월 7일
-
-size → resize(), size()
-
-pos → pos(), move()
-
-위 두 개는 setter를 사용하지 않음!
-
-thisㄱㅏ 없으면 자식으로 잡히지 않아 레이아웃에 보이지 않음
-
-setlayout시에 자식으로 붙이기 때문에 위젯을 추가시 처음부터 부모를 지정해주는 것이 좋다.
-
-&는 accelerate
-
-buddy?
-
 ## 4. Qt의 레이아웃
 
 ### QWidget의 위젯 배치/화면 구성
@@ -25,7 +7,7 @@ buddy?
 
 ### 좌표계
 
-![[ 출처 | [https://learn365project.com/2015/08/01/why-do-computer-coordinates-start-from-the-upper-left-corner/](https://learn365project.com/2015/08/01/why-do-computer-coordinates-start-from-the-upper-left-corner/) ]](Day%2018%20ff86d016d3ec46b4a37fc80f8d82df5d/computer_coordinates.png)
+![computer_coordinates](https://github.com/user-attachments/assets/6fee8934-2a2f-4892-bbac-856559c8f964)
 
 [ 출처 | [https://learn365project.com/2015/08/01/why-do-computer-coordinates-start-from-the-upper-left-corner/](https://learn365project.com/2015/08/01/why-do-computer-coordinates-start-from-the-upper-left-corner/) ]
 
