@@ -36,7 +36,7 @@ Date: 2024년 8월 5일
 
 ## 2. Qt 프로그래밍
 
-![[ 출처 | [http://studycodingforme.blogspot.com/2017/06/qtwidget.html](http://studycodingforme.blogspot.com/2017/06/qtwidget.html) ]](Day%2016%20d91b80bf3bd544679535e53fa66963cb/hierarchy.jpg)
+![hierarchy](https://github.com/user-attachments/assets/cd00ab49-f699-4d21-9369-f7a5df1b2138)
 
 [ 출처 | [http://studycodingforme.blogspot.com/2017/06/qtwidget.html](http://studycodingforme.blogspot.com/2017/06/qtwidget.html) ]
 
