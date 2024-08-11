@@ -10,7 +10,7 @@ timer는 싱글 스레드에서 실행
 
 ### 위젯
 
-![[ 출처 | [https://wiki.qt.io/Qt_for_Beginners](https://wiki.qt.io/Qt_for_Beginners) ]](Day%201%20070c9e17724c43d282d82690a2cecc87/Beginner-Class-Hierarchy.jpg)
+![Beginner-Class-Hierarchy](https://github.com/user-attachments/assets/f276eb7c-8be5-4a84-a525-17b5c15ba272)
 
 [ 출처 | [https://wiki.qt.io/Qt_for_Beginners](https://wiki.qt.io/Qt_for_Beginners) ]
 
