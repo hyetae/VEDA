@@ -66,7 +66,7 @@ bool game() {
 
 int main() {
     string word;
-    ifstream f("/Users/yunhyegyeong/Documents/coding-test-study/hyetae/words.txt");
+    ifstream f("");
     while (getline(f, word))
         words.push_back(word);
 
