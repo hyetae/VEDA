@@ -80,9 +80,13 @@ void Widget::setNum() {
     QPushButton *btn = dynamic_cast<QPushButton*>(sender());
     QString str1;
 
-    if (btn != nullptr) {
+
+    if (btn != nullptr)
+        str1 = btn->text();
+
+    if (label != nullptr) {
         QString str2 = label->text();
-        label->setText((str2 == "0" | isFirst) ? str1 : str1 + str2);
+        label->setText((str2 == "0" | isFirst) ? str1 : str2 + str1);
         isFirst = false;
     }
 }
