@@ -48,19 +48,24 @@ Widget::Widget(QWidget *parent)
     connect(btns.at(14), &QPushButton::clicked, this, [this](){
         qreal result = 0;
         isFirst = true;
-        if (op == '+')
+        switch (op.at(0).toLatin1()) {
+        case '+':
             result = num.toDouble() + label->text().toDouble();
-        else if (op == '-')
+            break;
+        case '-':
             result = num.toDouble() - label->text().toDouble();
-        else if (op == 'x')
+            break;
+        case 'x+':
             result = num.toDouble() * label->text().toDouble();
-        else if (op == '/') {
+            break;
+        case '/':
             if (label->text().toDouble())
                 result = num.toDouble() / label->text().toDouble();
             else {
                 label->setText("Error: Cannot Divide by Zero");
                 return;
             }
+            break;
         }
         label->setText(QString::number(result));
     });
