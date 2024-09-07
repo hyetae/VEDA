@@ -17,32 +17,25 @@ Widget::Widget(QWidget *parent)
         "C", "0", "=", "+"
     };
 
+    // 계산, 연산 버튼
+    const char* methods[16] = {
+        SLOT(setNum()), SLOT(setNum()), SLOT(setNum()), SLOT(setOp()),
+        SLOT(setNum()), SLOT(setNum()), SLOT(setNum()), SLOT(setOp()),
+        SLOT(setNum()), SLOT(setNum()), SLOT(setNum()), SLOT(setOp()),
+        SLOT(setNum()), SLOT(), SLOT(), SLOT(setOp()),
+    };
+
     for (int y = 0; y < W; y++)
         for (int x = 0; x < W; x++) {
-            btns.append(new QPushButton(BtnChar[x + y * W], this));
-            btns.at(x + y * W)->setGeometry(5 + 60 *  x, 50 + 60 * y, 60, 60);
-        }
-
-    // 숫자 버튼
-    connect(btns.at(0), SIGNAL(clicked()), SLOT(setNum()));
-    connect(btns.at(1), SIGNAL(clicked()), SLOT(setNum()));
-    connect(btns.at(2), SIGNAL(clicked()), SLOT(setNum()));
-    connect(btns.at(4), SIGNAL(clicked()), SLOT(setNum()));
-    connect(btns.at(5), SIGNAL(clicked()), SLOT(setNum()));
-    connect(btns.at(6), SIGNAL(clicked()), SLOT(setNum()));
-    connect(btns.at(8), SIGNAL(clicked()), SLOT(setNum()));
-    connect(btns.at(9), SIGNAL(clicked()), SLOT(setNum()));
-    connect(btns.at(10), SIGNAL(clicked()), SLOT(setNum()));
-    connect(btns.at(13), SIGNAL(clicked()), SLOT(setNum()));
+            int n = x + y * W;
+            btns.append(new QPushButton(BtnChar[n], this));
+            btns.at(n)->setGeometry(5 + 60 *  x, 50 + 60 * y, 60, 60);
+            if (n != 12 && n != 14)
+                connect(btns.at(n), SIGNAL(clicked()), methods[n]);
+    }
 
     // 초기화 버튼
     connect(btns.at(12), &QPushButton::clicked, this, [=](){label->setText("0");});
-
-    // 연산자 버튼
-    connect(btns.at(3), SIGNAL(clicked()), SLOT(setOp()));
-    connect(btns.at(7), SIGNAL(clicked()), SLOT(setOp()));
-    connect(btns.at(11), SIGNAL(clicked()), SLOT(setOp()));
-    connect(btns.at(15), SIGNAL(clicked()), SLOT(setOp()));
 
     // 계산 버튼
     connect(btns.at(14), &QPushButton::clicked, this, [this](){
@@ -55,7 +48,7 @@ Widget::Widget(QWidget *parent)
         case '-':
             result = num.toDouble() - label->text().toDouble();
             break;
-        case 'x+':
+        case 'x':
             result = num.toDouble() * label->text().toDouble();
             break;
         case '/':
@@ -91,7 +84,11 @@ void Widget::setNum() {
 
     if (label != nullptr) {
         QString str2 = label->text();
+#if 1
         label->setText((str2 == "0" | isFirst) ? str1 : str2 + str1);
+#else
+        label->setText(QString::number(str2.toDouble() * 10 + str1.toDouble()));
+#endif
         isFirst = false;
     }
 }
