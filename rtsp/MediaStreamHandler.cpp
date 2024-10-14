@@ -25,14 +25,15 @@ void MediaStreamHandler::handleMediaStream() {
 
     snd_pcm_t* pcmHandle;
     snd_pcm_hw_params_t* params;
-    int rc, dir, sampleRate = 8000 ; // G.711의 샘플링 레이트
+    int rc, dir;
+    unsigned int sampleRate = 8000 ; // G.711의 샘플링 레이트
     size_t payloadSize = 160;  // 20ms당 160 샘플
     int frames = payloadSize;  // G.711은 8kHz에서 20ms당 160 샘플
     auto buffer = new short[payloadSize];
     auto payload = new unsigned char[payloadSize];
 
-    initAlsa();
-    if (rc < 0) {
+    initAlsa(pcmHandle, params, rc, sampleRate, dir);
+        if (rc < 0) {
         fprintf(stderr, "ALSA initialization failed\n");
         exit(1);
     }
@@ -92,7 +93,7 @@ unsigned char MediaStreamHandler::linearToUlaw(int sample) {
     return ~(sign | (exponent << 4) | mantissa);
 }
 
-void MediaStreamHandler::initAlsa(snd_pcm_t*& pcmHandle, snd_pcm_hw_params_t*& params, int& rc, int& sampleRate, int& dir) {
+void MediaStreamHandler::initAlsa(snd_pcm_t*& pcmHandle, snd_pcm_hw_params_t*& params, int& rc, unsigned int& sampleRate, int& dir) {
     // PCM 장치 열기
     rc = snd_pcm_open(&pcmHandle, "default", SND_PCM_STREAM_CAPTURE, 0);
     if (rc < 0) {
@@ -143,7 +144,7 @@ void MediaStreamHandler::initAlsa(snd_pcm_t*& pcmHandle, snd_pcm_hw_params_t*& p
     printf("ALSA PCM device initialized with sample rate: %d\n", sampleRate);
 }
 
-int MediaStreamHandler::captureAudio(snd_pcm_t*& pcmHandle, unsigned char*& buffer, int& frames, int& rc, unsigned char*& payload) {
+int MediaStreamHandler::captureAudio(snd_pcm_t*& pcmHandle, short*& buffer, int& frames, int& rc, unsigned char*& payload) {
     // ALSA로부터 오디오 데이터 캡처
     rc = snd_pcm_readi(pcmHandle, buffer, frames);
     if (rc == -EPIPE) {

@@ -1,12 +1,10 @@
-#include <chrono>
 #include <random>
 #include <iostream>
 #include <cstring>
-#include <sys/types.h>
-#include <sys/socket.h>
 #include <netdb.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include <chrono>
 #include "utils.h"
 
 using namespace std;

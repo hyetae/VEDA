@@ -2,6 +2,7 @@
 #define RTSP_UTILS_H
 
 #include <utility>
+#include <string>
 
 using namespace std;
 

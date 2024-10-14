@@ -15,8 +15,8 @@ public:
     void handleMediaStream();
 
     unsigned char linearToUlaw(int sample);
-    void initAlsa(snd_pcm_t*& pcmHandle, snd_pcm_hw_params_t*& params, int& rc, int& sampleRate, int& dir);
-    int captureAudio(snd_pcm_t*& pcmHandle, unsigned char*& buffer, int& frames, int& rc, unsigned char*& payload);
+    void initAlsa(snd_pcm_t*& pcmHandle, snd_pcm_hw_params_t*& params, int& rc, unsigned int& sampleRate, int& dir);
+    int captureAudio(snd_pcm_t*& pcmHandle, short*& buffer, int& frames, int& rc, unsigned char*& payload);
 
     void playStreaming();
     void pauseStreaming();

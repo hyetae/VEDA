@@ -7,7 +7,7 @@ Protos::Protos(uint16_t seqNum, uint32_t ssrc)
     : seqNum(seqNum), timestamp(0), ssrc(ssrc), packetCount(0), byteCount(0) {}
 
 unsigned char* Protos::createRTPPacket(unsigned char* payload) {
-    auto packet = new unsigned char[sizeof(RTPHeader) + payloadSize];
+    auto packet = unsigned char[sizeof(RTPHeader) + payloadSize];
 
     RTPHeader header;
     header.version = 2;
