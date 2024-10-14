@@ -177,53 +177,29 @@ MediaStreamHandler.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtsp.dir/build.make CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.s
 .PHONY : MediaStreamHandler.cpp.s
 
-RTCP.o: RTCP.cpp.o
-.PHONY : RTCP.o
+Protos.o: Protos.cpp.o
+.PHONY : Protos.o
 
 # target to build an object file
-RTCP.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtsp.dir/build.make CMakeFiles/rtsp.dir/RTCP.cpp.o
-.PHONY : RTCP.cpp.o
+Protos.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtsp.dir/build.make CMakeFiles/rtsp.dir/Protos.cpp.o
+.PHONY : Protos.cpp.o
 
-RTCP.i: RTCP.cpp.i
-.PHONY : RTCP.i
-
-# target to preprocess a source file
-RTCP.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtsp.dir/build.make CMakeFiles/rtsp.dir/RTCP.cpp.i
-.PHONY : RTCP.cpp.i
-
-RTCP.s: RTCP.cpp.s
-.PHONY : RTCP.s
-
-# target to generate assembly for a file
-RTCP.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtsp.dir/build.make CMakeFiles/rtsp.dir/RTCP.cpp.s
-.PHONY : RTCP.cpp.s
-
-RTP.o: RTP.cpp.o
-.PHONY : RTP.o
-
-# target to build an object file
-RTP.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtsp.dir/build.make CMakeFiles/rtsp.dir/RTP.cpp.o
-.PHONY : RTP.cpp.o
-
-RTP.i: RTP.cpp.i
-.PHONY : RTP.i
+Protos.i: Protos.cpp.i
+.PHONY : Protos.i
 
 # target to preprocess a source file
-RTP.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtsp.dir/build.make CMakeFiles/rtsp.dir/RTP.cpp.i
-.PHONY : RTP.cpp.i
+Protos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtsp.dir/build.make CMakeFiles/rtsp.dir/Protos.cpp.i
+.PHONY : Protos.cpp.i
 
-RTP.s: RTP.cpp.s
-.PHONY : RTP.s
+Protos.s: Protos.cpp.s
+.PHONY : Protos.s
 
 # target to generate assembly for a file
-RTP.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtsp.dir/build.make CMakeFiles/rtsp.dir/RTP.cpp.s
-.PHONY : RTP.cpp.s
+Protos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rtsp.dir/build.make CMakeFiles/rtsp.dir/Protos.cpp.s
+.PHONY : Protos.cpp.s
 
 RequestHandler.o: RequestHandler.cpp.o
 .PHONY : RequestHandler.o
@@ -336,12 +312,9 @@ help:
 	@echo "... MediaStreamHandler.o"
 	@echo "... MediaStreamHandler.i"
 	@echo "... MediaStreamHandler.s"
-	@echo "... RTCP.o"
-	@echo "... RTCP.i"
-	@echo "... RTCP.s"
-	@echo "... RTP.o"
-	@echo "... RTP.i"
-	@echo "... RTP.s"
+	@echo "... Protos.o"
+	@echo "... Protos.i"
+	@echo "... Protos.s"
 	@echo "... RequestHandler.o"
 	@echo "... RequestHandler.i"
 	@echo "... RequestHandler.s"

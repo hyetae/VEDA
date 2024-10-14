@@ -89,9 +89,7 @@ pair<int, int> RequestHandler::parsePorts(const string& request) {
                 if (dashPos != string::npos) {
                     int rtpPort = stoi(portRange.substr(0, dashPos));      // RTP 포트
                     int rtcpPort = stoi(portRange.substr(dashPos + 1));   // RTCP 포트
-                    cout << "rtpPort: " << rtpPort << endl;
-                    cout << "rtcpPort: " << rtcpPort << endl;
-                    return {rtpPort, rtcpPort};
+		    return {rtpPort, rtcpPort};
                 }
             }
         }
@@ -118,9 +116,9 @@ void RequestHandler::handleDescribeRequest(int clientSocket, int cseq, ClientSes
                       + " IN IP4 " + ip + "\r\n"
                       "s=Audio Stream\r\n"
                       "c=IN IP4 " + ip + "\r\n"
-                      "t=" + to_string(utils::getTime()) + " 0\r\n"
-                      "m=video " + to_string(session->getPort().first)
-                      + " RTP/AVP 96\r\n"
+                      "t=0 0\r\n"
+                      "m=audio " + to_string(session->getPort().first)
+                      + " RTP/AVP 0\r\n"
                       "a=rtpmap:0 PCMU/8000\r\n";
 
     string response = "RTSP/1.0 200 OK\r\n"

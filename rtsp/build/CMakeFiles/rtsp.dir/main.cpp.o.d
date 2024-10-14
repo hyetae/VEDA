@@ -188,22 +188,8 @@ CMakeFiles/rtsp.dir/main.cpp.o: /home/hyetae/rtsp/main.cpp \
  /usr/include/c++/12/bits/this_thread_sleep.h \
  /usr/include/aarch64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/aarch64-linux-gnu/bits/semaphore.h \
- /home/hyetae/rtsp/ClientSession.h /usr/include/c++/12/map \
- /usr/include/c++/12/bits/stl_tree.h \
- /usr/include/c++/12/ext/aligned_buffer.h \
- /usr/include/c++/12/bits/node_handle.h \
- /usr/include/c++/12/bits/stl_map.h \
- /usr/include/c++/12/bits/stl_multimap.h \
- /usr/include/c++/12/bits/erase_if.h /usr/include/c++/12/queue \
- /usr/include/c++/12/deque /usr/include/c++/12/bits/stl_uninitialized.h \
- /usr/include/c++/12/bits/stl_deque.h /usr/include/c++/12/bits/deque.tcc \
- /usr/include/c++/12/vector /usr/include/c++/12/bits/stl_vector.h \
- /usr/include/c++/12/bits/stl_bvector.h \
- /usr/include/c++/12/bits/vector.tcc /usr/include/c++/12/bits/stl_heap.h \
- /usr/include/c++/12/bits/stl_queue.h /usr/include/c++/12/mutex \
- /usr/include/c++/12/bits/unique_lock.h /usr/include/c++/12/chrono \
- /usr/include/c++/12/sstream /usr/include/c++/12/bits/sstream.tcc \
- /home/hyetae/rtsp/RequestHandler.h /home/hyetae/rtsp/SocketHandler.h \
+ /home/hyetae/rtsp/ClientSession.h /home/hyetae/rtsp/SocketHandler.h \
+ /home/hyetae/rtsp/Protos.h /usr/include/c++/12/cstddef \
  /usr/include/c++/12/cstring /usr/include/string.h /usr/include/strings.h \
  /usr/include/aarch64-linux-gnu/sys/socket.h \
  /usr/include/aarch64-linux-gnu/bits/types/struct_iovec.h \
@@ -222,7 +208,23 @@ CMakeFiles/rtsp.dir/main.cpp.o: /home/hyetae/rtsp/main.cpp \
  /usr/include/rpc/netdb.h \
  /usr/include/aarch64-linux-gnu/bits/types/sigevent_t.h \
  /usr/include/aarch64-linux-gnu/bits/types/__sigval_t.h \
- /usr/include/aarch64-linux-gnu/bits/netdb.h \
+ /usr/include/aarch64-linux-gnu/bits/netdb.h /usr/include/c++/12/vector \
+ /usr/include/c++/12/bits/stl_uninitialized.h \
+ /usr/include/c++/12/bits/stl_vector.h \
+ /usr/include/c++/12/bits/stl_bvector.h \
+ /usr/include/c++/12/bits/vector.tcc /usr/include/c++/12/map \
+ /usr/include/c++/12/bits/stl_tree.h \
+ /usr/include/c++/12/ext/aligned_buffer.h \
+ /usr/include/c++/12/bits/node_handle.h \
+ /usr/include/c++/12/bits/stl_map.h \
+ /usr/include/c++/12/bits/stl_multimap.h \
+ /usr/include/c++/12/bits/erase_if.h /usr/include/c++/12/queue \
+ /usr/include/c++/12/deque /usr/include/c++/12/bits/stl_deque.h \
+ /usr/include/c++/12/bits/deque.tcc /usr/include/c++/12/bits/stl_heap.h \
+ /usr/include/c++/12/bits/stl_queue.h /usr/include/c++/12/mutex \
+ /usr/include/c++/12/bits/unique_lock.h /usr/include/c++/12/chrono \
+ /usr/include/c++/12/sstream /usr/include/c++/12/bits/sstream.tcc \
+ /home/hyetae/rtsp/RequestHandler.h \
  /home/hyetae/rtsp/MediaStreamHandler.h \
  /usr/include/c++/12/condition_variable \
  /usr/include/c++/12/bits/shared_ptr.h \

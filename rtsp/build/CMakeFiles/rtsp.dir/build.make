@@ -83,10 +83,24 @@ CMakeFiles/rtsp.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/rtsp.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyetae/rtsp/main.cpp -o CMakeFiles/rtsp.dir/main.cpp.s
 
+CMakeFiles/rtsp.dir/utils.cpp.o: CMakeFiles/rtsp.dir/flags.make
+CMakeFiles/rtsp.dir/utils.cpp.o: /home/hyetae/rtsp/utils.cpp
+CMakeFiles/rtsp.dir/utils.cpp.o: CMakeFiles/rtsp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/rtsp.dir/utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtsp.dir/utils.cpp.o -MF CMakeFiles/rtsp.dir/utils.cpp.o.d -o CMakeFiles/rtsp.dir/utils.cpp.o -c /home/hyetae/rtsp/utils.cpp
+
+CMakeFiles/rtsp.dir/utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/rtsp.dir/utils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hyetae/rtsp/utils.cpp > CMakeFiles/rtsp.dir/utils.cpp.i
+
+CMakeFiles/rtsp.dir/utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/rtsp.dir/utils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyetae/rtsp/utils.cpp -o CMakeFiles/rtsp.dir/utils.cpp.s
+
 CMakeFiles/rtsp.dir/RequestHandler.cpp.o: CMakeFiles/rtsp.dir/flags.make
 CMakeFiles/rtsp.dir/RequestHandler.cpp.o: /home/hyetae/rtsp/RequestHandler.cpp
 CMakeFiles/rtsp.dir/RequestHandler.cpp.o: CMakeFiles/rtsp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/rtsp.dir/RequestHandler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/rtsp.dir/RequestHandler.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtsp.dir/RequestHandler.cpp.o -MF CMakeFiles/rtsp.dir/RequestHandler.cpp.o.d -o CMakeFiles/rtsp.dir/RequestHandler.cpp.o -c /home/hyetae/rtsp/RequestHandler.cpp
 
 CMakeFiles/rtsp.dir/RequestHandler.cpp.i: cmake_force
@@ -100,7 +114,7 @@ CMakeFiles/rtsp.dir/RequestHandler.cpp.s: cmake_force
 CMakeFiles/rtsp.dir/SocketHandler.cpp.o: CMakeFiles/rtsp.dir/flags.make
 CMakeFiles/rtsp.dir/SocketHandler.cpp.o: /home/hyetae/rtsp/SocketHandler.cpp
 CMakeFiles/rtsp.dir/SocketHandler.cpp.o: CMakeFiles/rtsp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/rtsp.dir/SocketHandler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/rtsp.dir/SocketHandler.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtsp.dir/SocketHandler.cpp.o -MF CMakeFiles/rtsp.dir/SocketHandler.cpp.o.d -o CMakeFiles/rtsp.dir/SocketHandler.cpp.o -c /home/hyetae/rtsp/SocketHandler.cpp
 
 CMakeFiles/rtsp.dir/SocketHandler.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/rtsp.dir/SocketHandler.cpp.s: cmake_force
 CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o: CMakeFiles/rtsp.dir/flags.make
 CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o: /home/hyetae/rtsp/MediaStreamHandler.cpp
 CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o: CMakeFiles/rtsp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o -MF CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o.d -o CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o -c /home/hyetae/rtsp/MediaStreamHandler.cpp
 
 CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.s: cmake_force
 CMakeFiles/rtsp.dir/ClientSession.cpp.o: CMakeFiles/rtsp.dir/flags.make
 CMakeFiles/rtsp.dir/ClientSession.cpp.o: /home/hyetae/rtsp/ClientSession.cpp
 CMakeFiles/rtsp.dir/ClientSession.cpp.o: CMakeFiles/rtsp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/rtsp.dir/ClientSession.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/rtsp.dir/ClientSession.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtsp.dir/ClientSession.cpp.o -MF CMakeFiles/rtsp.dir/ClientSession.cpp.o.d -o CMakeFiles/rtsp.dir/ClientSession.cpp.o -c /home/hyetae/rtsp/ClientSession.cpp
 
 CMakeFiles/rtsp.dir/ClientSession.cpp.i: cmake_force
@@ -139,74 +153,44 @@ CMakeFiles/rtsp.dir/ClientSession.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/rtsp.dir/ClientSession.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyetae/rtsp/ClientSession.cpp -o CMakeFiles/rtsp.dir/ClientSession.cpp.s
 
-CMakeFiles/rtsp.dir/RTP.cpp.o: CMakeFiles/rtsp.dir/flags.make
-CMakeFiles/rtsp.dir/RTP.cpp.o: /home/hyetae/rtsp/RTP.cpp
-CMakeFiles/rtsp.dir/RTP.cpp.o: CMakeFiles/rtsp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/rtsp.dir/RTP.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtsp.dir/RTP.cpp.o -MF CMakeFiles/rtsp.dir/RTP.cpp.o.d -o CMakeFiles/rtsp.dir/RTP.cpp.o -c /home/hyetae/rtsp/RTP.cpp
+CMakeFiles/rtsp.dir/Protos.cpp.o: CMakeFiles/rtsp.dir/flags.make
+CMakeFiles/rtsp.dir/Protos.cpp.o: /home/hyetae/rtsp/Protos.cpp
+CMakeFiles/rtsp.dir/Protos.cpp.o: CMakeFiles/rtsp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/rtsp.dir/Protos.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtsp.dir/Protos.cpp.o -MF CMakeFiles/rtsp.dir/Protos.cpp.o.d -o CMakeFiles/rtsp.dir/Protos.cpp.o -c /home/hyetae/rtsp/Protos.cpp
 
-CMakeFiles/rtsp.dir/RTP.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/rtsp.dir/RTP.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hyetae/rtsp/RTP.cpp > CMakeFiles/rtsp.dir/RTP.cpp.i
+CMakeFiles/rtsp.dir/Protos.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/rtsp.dir/Protos.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hyetae/rtsp/Protos.cpp > CMakeFiles/rtsp.dir/Protos.cpp.i
 
-CMakeFiles/rtsp.dir/RTP.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/rtsp.dir/RTP.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyetae/rtsp/RTP.cpp -o CMakeFiles/rtsp.dir/RTP.cpp.s
-
-CMakeFiles/rtsp.dir/RTCP.cpp.o: CMakeFiles/rtsp.dir/flags.make
-CMakeFiles/rtsp.dir/RTCP.cpp.o: /home/hyetae/rtsp/RTCP.cpp
-CMakeFiles/rtsp.dir/RTCP.cpp.o: CMakeFiles/rtsp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/rtsp.dir/RTCP.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtsp.dir/RTCP.cpp.o -MF CMakeFiles/rtsp.dir/RTCP.cpp.o.d -o CMakeFiles/rtsp.dir/RTCP.cpp.o -c /home/hyetae/rtsp/RTCP.cpp
-
-CMakeFiles/rtsp.dir/RTCP.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/rtsp.dir/RTCP.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hyetae/rtsp/RTCP.cpp > CMakeFiles/rtsp.dir/RTCP.cpp.i
-
-CMakeFiles/rtsp.dir/RTCP.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/rtsp.dir/RTCP.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyetae/rtsp/RTCP.cpp -o CMakeFiles/rtsp.dir/RTCP.cpp.s
-
-CMakeFiles/rtsp.dir/utils.cpp.o: CMakeFiles/rtsp.dir/flags.make
-CMakeFiles/rtsp.dir/utils.cpp.o: /home/hyetae/rtsp/utils.cpp
-CMakeFiles/rtsp.dir/utils.cpp.o: CMakeFiles/rtsp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/rtsp.dir/utils.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/rtsp.dir/utils.cpp.o -MF CMakeFiles/rtsp.dir/utils.cpp.o.d -o CMakeFiles/rtsp.dir/utils.cpp.o -c /home/hyetae/rtsp/utils.cpp
-
-CMakeFiles/rtsp.dir/utils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/rtsp.dir/utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hyetae/rtsp/utils.cpp > CMakeFiles/rtsp.dir/utils.cpp.i
-
-CMakeFiles/rtsp.dir/utils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/rtsp.dir/utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyetae/rtsp/utils.cpp -o CMakeFiles/rtsp.dir/utils.cpp.s
+CMakeFiles/rtsp.dir/Protos.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/rtsp.dir/Protos.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyetae/rtsp/Protos.cpp -o CMakeFiles/rtsp.dir/Protos.cpp.s
 
 # Object files for target rtsp
 rtsp_OBJECTS = \
 "CMakeFiles/rtsp.dir/main.cpp.o" \
+"CMakeFiles/rtsp.dir/utils.cpp.o" \
 "CMakeFiles/rtsp.dir/RequestHandler.cpp.o" \
 "CMakeFiles/rtsp.dir/SocketHandler.cpp.o" \
 "CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o" \
 "CMakeFiles/rtsp.dir/ClientSession.cpp.o" \
-"CMakeFiles/rtsp.dir/RTP.cpp.o" \
-"CMakeFiles/rtsp.dir/RTCP.cpp.o" \
-"CMakeFiles/rtsp.dir/utils.cpp.o"
+"CMakeFiles/rtsp.dir/Protos.cpp.o"
 
 # External object files for target rtsp
 rtsp_EXTERNAL_OBJECTS =
 
 rtsp: CMakeFiles/rtsp.dir/main.cpp.o
+rtsp: CMakeFiles/rtsp.dir/utils.cpp.o
 rtsp: CMakeFiles/rtsp.dir/RequestHandler.cpp.o
 rtsp: CMakeFiles/rtsp.dir/SocketHandler.cpp.o
 rtsp: CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o
 rtsp: CMakeFiles/rtsp.dir/ClientSession.cpp.o
-rtsp: CMakeFiles/rtsp.dir/RTP.cpp.o
-rtsp: CMakeFiles/rtsp.dir/RTCP.cpp.o
-rtsp: CMakeFiles/rtsp.dir/utils.cpp.o
+rtsp: CMakeFiles/rtsp.dir/Protos.cpp.o
 rtsp: CMakeFiles/rtsp.dir/build.make
 rtsp: /usr/lib/aarch64-linux-gnu/libasound.so
 rtsp: CMakeFiles/rtsp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable rtsp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/hyetae/rtsp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable rtsp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/rtsp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -44,13 +44,13 @@ int SocketHandler::initSocket(int tcpPort) {
 }
 
 bool SocketHandler::createUDPSocket(char* ip, int port1, int port2) {
-    rtpSocket = socket(AF_INET, SOCK_STREAM, 0);
+    rtpSocket = socket(AF_INET, SOCK_DGRAM, 0);
     if (rtpSocket == -1) {
         cerr << "Failed to create socket: " << port1 << endl;
         return false;
     }
 
-    rtcpSocket = socket(AF_INET, SOCK_STREAM, 0);
+    rtcpSocket = socket(AF_INET, SOCK_DGRAM, 0);
     if (rtcpSocket == -1) {
         cerr << "Failed to create socket: " << port2 << endl;
         return false;
@@ -116,7 +116,7 @@ void SocketHandler::sendRTPPacket(unsigned char* rtpPacket) {
     if (sentBytes == -1) {
         cerr << "Failed to send RTP packet\n";
         exit(1);
-    }
+    } 
 
 //    cout << "Sent RTP packet to " << clientIP << ":" << clientRTPPort << endl;
 }
@@ -127,7 +127,7 @@ void SocketHandler::sendSenderReport(Protos::SenderReport* senderReport) {
     if (sentBytes == -1) {
         cerr << "Failed to send RTCP response\n";
         exit(1);
-    }
+    } 
 
 //    cout << "Sent RTCP response:\n" << response << endl;
 }

@@ -10,8 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/hyetae/rtsp/ClientSession.cpp" "CMakeFiles/rtsp.dir/ClientSession.cpp.o" "gcc" "CMakeFiles/rtsp.dir/ClientSession.cpp.o.d"
   "/home/hyetae/rtsp/MediaStreamHandler.cpp" "CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o" "gcc" "CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o.d"
-  "/home/hyetae/rtsp/RTCP.cpp" "CMakeFiles/rtsp.dir/RTCP.cpp.o" "gcc" "CMakeFiles/rtsp.dir/RTCP.cpp.o.d"
-  "/home/hyetae/rtsp/RTP.cpp" "CMakeFiles/rtsp.dir/RTP.cpp.o" "gcc" "CMakeFiles/rtsp.dir/RTP.cpp.o.d"
+  "/home/hyetae/rtsp/Protos.cpp" "CMakeFiles/rtsp.dir/Protos.cpp.o" "gcc" "CMakeFiles/rtsp.dir/Protos.cpp.o.d"
   "/home/hyetae/rtsp/RequestHandler.cpp" "CMakeFiles/rtsp.dir/RequestHandler.cpp.o" "gcc" "CMakeFiles/rtsp.dir/RequestHandler.cpp.o.d"
   "/home/hyetae/rtsp/SocketHandler.cpp" "CMakeFiles/rtsp.dir/SocketHandler.cpp.o" "gcc" "CMakeFiles/rtsp.dir/SocketHandler.cpp.o.d"
   "/home/hyetae/rtsp/main.cpp" "CMakeFiles/rtsp.dir/main.cpp.o" "gcc" "CMakeFiles/rtsp.dir/main.cpp.o.d"

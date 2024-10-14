@@ -1,7 +1,7 @@
 CMakeFiles/rtsp.dir/RequestHandler.cpp.o: \
  /home/hyetae/rtsp/RequestHandler.cpp /usr/include/stdc-predef.h \
  /home/hyetae/rtsp/RequestHandler.h /home/hyetae/rtsp/SocketHandler.h \
- /usr/include/c++/12/iostream \
+ /home/hyetae/rtsp/Protos.h /usr/include/c++/12/cstdint \
  /usr/include/aarch64-linux-gnu/c++/12/bits/c++config.h \
  /usr/include/aarch64-linux-gnu/c++/12/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -12,17 +12,25 @@ CMakeFiles/rtsp.dir/RequestHandler.cpp.o: \
  /usr/include/aarch64-linux-gnu/gnu/stubs.h \
  /usr/include/aarch64-linux-gnu/gnu/stubs-lp64.h \
  /usr/include/aarch64-linux-gnu/c++/12/bits/cpu_defines.h \
- /usr/include/c++/12/pstl/pstl_config.h /usr/include/c++/12/ostream \
+ /usr/include/c++/12/pstl/pstl_config.h \
+ /usr/lib/gcc/aarch64-linux-gnu/12/include/stdint.h /usr/include/stdint.h \
+ /usr/include/aarch64-linux-gnu/bits/libc-header-start.h \
+ /usr/include/aarch64-linux-gnu/bits/types.h \
+ /usr/include/aarch64-linux-gnu/bits/typesizes.h \
+ /usr/include/aarch64-linux-gnu/bits/time64.h \
+ /usr/include/aarch64-linux-gnu/bits/wchar.h \
+ /usr/include/aarch64-linux-gnu/bits/stdint-intn.h \
+ /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/c++/12/cstddef \
+ /usr/lib/gcc/aarch64-linux-gnu/12/include/stddef.h \
+ /usr/include/c++/12/iostream /usr/include/c++/12/ostream \
  /usr/include/c++/12/ios /usr/include/c++/12/iosfwd \
  /usr/include/c++/12/bits/stringfwd.h \
  /usr/include/c++/12/bits/memoryfwd.h /usr/include/c++/12/bits/postypes.h \
  /usr/include/c++/12/cwchar /usr/include/wchar.h \
- /usr/include/aarch64-linux-gnu/bits/libc-header-start.h \
  /usr/include/aarch64-linux-gnu/bits/floatn.h \
  /usr/include/aarch64-linux-gnu/bits/floatn-common.h \
- /usr/lib/gcc/aarch64-linux-gnu/12/include/stddef.h \
  /usr/lib/gcc/aarch64-linux-gnu/12/include/stdarg.h \
- /usr/include/aarch64-linux-gnu/bits/wchar.h \
  /usr/include/aarch64-linux-gnu/bits/types/wint_t.h \
  /usr/include/aarch64-linux-gnu/bits/types/mbstate_t.h \
  /usr/include/aarch64-linux-gnu/bits/types/__mbstate_t.h \
@@ -46,13 +54,7 @@ CMakeFiles/rtsp.dir/RequestHandler.cpp.o: \
  /usr/include/c++/12/bits/ranges_cmp.h \
  /usr/include/c++/12/bits/stl_iterator_base_funcs.h \
  /usr/include/c++/12/bits/concept_check.h \
- /usr/include/c++/12/debug/assertions.h /usr/include/c++/12/cstdint \
- /usr/lib/gcc/aarch64-linux-gnu/12/include/stdint.h /usr/include/stdint.h \
- /usr/include/aarch64-linux-gnu/bits/types.h \
- /usr/include/aarch64-linux-gnu/bits/typesizes.h \
- /usr/include/aarch64-linux-gnu/bits/time64.h \
- /usr/include/aarch64-linux-gnu/bits/stdint-intn.h \
- /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/c++/12/debug/assertions.h \
  /usr/include/c++/12/bits/localefwd.h \
  /usr/include/aarch64-linux-gnu/c++/12/bits/c++locale.h \
  /usr/include/c++/12/clocale /usr/include/locale.h \

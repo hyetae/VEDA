@@ -31,6 +31,10 @@ void MediaStreamHandler::handleMediaStream() {
     int frames = payloadSize;  // G.711은 8kHz에서 20ms당 160 샘플
     auto buffer = new short[payloadSize];
     auto payload = new unsigned char[payloadSize];
+    unsigned short seqNum = 0;
+    unsigned int timestamp = 0;
+    unsigned int packetCount = 0;
+    unsigned int octetCount = 0;
 
     initAlsa(pcmHandle, params, rc, sampleRate, dir);
         if (rc < 0) {
@@ -51,28 +55,31 @@ void MediaStreamHandler::handleMediaStream() {
             unsigned char rtpPacket[sizeof(Protos::RTPHeader) + payloadSize];
             Protos::SenderReport sr;
 
-            cout << "오디오 캡처" << endl;
             if (captureAudio(pcmHandle, buffer, frames, rc, payload) < 0) {
                 cerr << "오디오 캡처 실패..." << endl;
                 break;
             }
-            cout << "오디오 성공" << endl;
 
-            cout << "RTP 패킷 생성" << endl;
-            protos.createRTPPacket(rtpPacket, payload);
-            cout << "RTP 패킷 전송" << endl;
+	        protos.createRTPPacket(seqNum, timestamp, rtpPacket, payload);
+
+	        cout << "RTP " << packetCount << "sent" << endl;
+
             socketHandler.sendRTPPacket(rtpPacket);
 
+            // 카운터 업데이트
+            seqNum++;
+            timestamp += payloadSize;  // G.711의 경우 8000 Hz, 160 샘플 = 20ms
+            packetCount++;
+            octetCount += payloadSize;
+	    
             // 10 패킷마다 RTCP SR 전송
-            if (protos.getPacketCount() % 10 == 0) {
-                cout << "Sender Report 생성" << endl;
-                protos.createSR(&sr);
+            if (packetCount % 10 == 0) {
+                cout << "RTCP sent" << endl;
+                protos.createSR(timestamp, packetCount, octetCount, &sr);
                 socketHandler.sendSenderReport(&sr);
-                cout << "Sender Report 전송" << endl;
             }
-
-            this_thread::sleep_for(std::chrono::milliseconds(20));  // 20ms 지연 (50 패킷/초)
-        }
+	    }
+        this_thread::sleep_for(std::chrono::milliseconds(20));  // 20ms 지연 (50 패킷/초)
     }
 //    cout << "RTP/RTCP 스트리밍 종료" << endl;
 }

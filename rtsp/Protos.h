@@ -53,16 +53,12 @@ public:
         uint32_t sender_octet_count;
     } __attribute__((packed));
 
-    void createRTPPacket(unsigned char* packet, unsigned char* payload);
-    void createSR(SenderReport* sr);
-    unsigned int getPacketCount();
+    void createRTPPacket(unsigned short seqNum, unsigned int timestamp, unsigned char* packet, unsigned char* payload);
+    void createSR(unsigned int timestamp, unsigned int packetCount, unsigned int octetCount, SenderReport* sr);
 
 private:
     size_t payloadSize;
-
-    uint16_t seqNum;
-    unsigned int timestamp, ssrc, packetCount, octetCount;
-
+    unsigned int ssrc;
     uint32_t byteCount;
 };
 
