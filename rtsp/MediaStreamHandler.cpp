@@ -48,6 +48,9 @@ void MediaStreamHandler::handleMediaStream() {
 
         // RTP 패킷 전송 (예시)
         if (!isPaused) {
+            unsigned char rtpPacket[sizeof(Protos::RTPHeader) + payloadSize];
+            Protos::SenderReport sr;
+
             cout << "오디오 캡처" << endl;
             if (captureAudio(pcmHandle, buffer, frames, rc, payload) < 0) {
                 cerr << "오디오 캡처 실패..." << endl;
@@ -56,23 +59,21 @@ void MediaStreamHandler::handleMediaStream() {
             cout << "오디오 성공" << endl;
 
             cout << "RTP 패킷 생성" << endl;
-            auto RTPPacket = protos.createRTPPacket(payload);
+            protos.createRTPPacket(rtpPacket, payload);
             cout << "RTP 패킷 전송" << endl;
-            socketHandler.sendRTPPacket(RTPPacket);
+            socketHandler.sendRTPPacket(rtpPacket);
 
             // 10 패킷마다 RTCP SR 전송
             if (protos.getPacketCount() % 10 == 0) {
                 cout << "Sender Report 생성" << endl;
-                auto sr = protos.createSR();
-                socketHandler.sendSenderReport(sr);
+                protos.createSR(&sr);
+                socketHandler.sendSenderReport(&sr);
                 cout << "Sender Report 전송" << endl;
             }
 
             this_thread::sleep_for(std::chrono::milliseconds(20));  // 20ms 지연 (50 패킷/초)
         }
     }
-    free(buffer);
-    free(payload);
 //    cout << "RTP/RTCP 스트리밍 종료" << endl;
 }
 

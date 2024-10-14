@@ -6,9 +6,7 @@
 Protos::Protos(uint16_t seqNum, uint32_t ssrc)
     : seqNum(seqNum), timestamp(0), ssrc(ssrc), packetCount(0), byteCount(0) {}
 
-unsigned char* Protos::createRTPPacket(unsigned char* payload) {
-    auto packet = unsigned char[sizeof(RTPHeader) + payloadSize];
-
+void Protos::createRTPPacket(unsigned char* packet, unsigned char* payload) {
     RTPHeader header;
     header.version = 2;
     header.p = 0;
@@ -21,7 +19,7 @@ unsigned char* Protos::createRTPPacket(unsigned char* payload) {
     header.ssrc = htonl(ssrc);
 
     // 페이로드 복사
-    memset(packet, 0, sizeof(packet));
+    memset(packet, 0, sizeof(*packet));
     memcpy(packet, &header, sizeof(header));
     memcpy(packet + sizeof(header), payload, payloadSize);
 
@@ -29,13 +27,9 @@ unsigned char* Protos::createRTPPacket(unsigned char* payload) {
     seqNum++;
     packetCount++;
     byteCount += payloadSize;
-
-    return packet;
 }
 
-Protos::SenderReport* Protos::createSR() {
-    SenderReport* sr = new SenderReport;
-
+void Protos::createSR(Protos::SenderReport* sr) {
     memset(sr, 0, sizeof(*sr));
     sr->version = 2;
     sr->p = 0;
@@ -50,8 +44,6 @@ Protos::SenderReport* Protos::createSR() {
     sr->rtp_timestamp = htonl(timestamp);
     sr->sender_packet_count = htonl(packetCount);
     sr->sender_octet_count = htonl(octetCount);
-
-    return sr;
 }
 
 unsigned int Protos::getPacketCount() { return packetCount; }

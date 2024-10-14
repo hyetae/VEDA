@@ -6,8 +6,8 @@
 
 using namespace std;
 
-ClientSession::ClientSession(int sessionId, int tcpSocket, int rtpPort, int rtcpPort)
-        : sessionId(sessionId), tcpSocket(tcpSocket), rtpPort(rtpPort), rtcpPort(rtcpPort), version(1), state("INIT") {
+ClientSession::ClientSession(int sessionId, int tcpSocket)
+        : sessionId(sessionId), tcpSocket(tcpSocket), version(1), state("INIT") {
     lastActivity = chrono::system_clock::now();
 }
 
@@ -21,6 +21,11 @@ int ClientSession::getVersion() const { return version; }
 string ClientSession::getState() const { return state; }
 
 pair<int, int> ClientSession::getPort() const { return {rtpPort, rtcpPort}; }
+
+void ClientSession::setPort(int port1, int port2) {
+    rtpPort = port1;
+    rtcpPort = port2;
+}
 
 // 클라이언트 상태 설정 (SETUP, PLAY, PAUSE 등)
 void ClientSession::setState(const string& newState) {

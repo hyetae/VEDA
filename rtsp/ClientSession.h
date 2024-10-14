@@ -12,7 +12,7 @@ using namespace std;
 
 class ClientSession {
 public:
-    ClientSession(int sessionId, int tcpSocket, int rtpPort, int rtcpPort);
+    ClientSession(int sessionId, int tcpSocket);
 
     // 세션 ID 반환
     int getSessionId() const;
@@ -24,6 +24,7 @@ public:
     string getState() const;
 
     pair<int, int> getPort() const;
+    void setPort(int port1, int port2);
 
     // 클라이언트 상태 설정 (SETUP, PLAY, PAUSE 등)
     void setState(const string& newState);

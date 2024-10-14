@@ -53,8 +53,8 @@ public:
         uint32_t sender_octet_count;
     } __attribute__((packed));
 
-    unsigned char* createRTPPacket(unsigned char* payload);
-    SenderReport* createSR();
+    void createRTPPacket(unsigned char* packet, unsigned char* payload);
+    void createSR(SenderReport* sr);
     unsigned int getPacketCount();
 
 private:

@@ -7,8 +7,6 @@
 #include "MediaStreamHandler.h"
 
 #define TCP_PORT 8554
-#define RTP_PORT 5004
-#define RTCP_PORT 5005
 #define DEST_IP "192.168.2.2"
 
 using namespace std;
@@ -20,7 +18,7 @@ int main() {
     auto socketHandler = SocketHandler();
 
     // SocketHandler 초기화
-    int tcpSocket = socketHandler.initSocket(DEST_IP, TCP_PORT, RTP_PORT, RTCP_PORT);
+    int tcpSocket = socketHandler.initSocket(DEST_IP, TCP_PORT);
     if (tcpSocket < 0) {
         cerr << "RTSP 서버 소켓 초기화 실패" << endl;
         return -1;
@@ -40,7 +38,7 @@ int main() {
 //        auto sessionHandler = new SessionHandler();
         auto mediaStreamHandler = MediaStreamHandler(socketHandler);
         auto requestHandler = RequestHandler(socketHandler, mediaStreamHandler);
-        auto clientSession = ClientSession(sessionNum++, tcpSocket, RTP_PORT, RTCP_PORT);
+        auto clientSession = ClientSession(sessionNum++, tcpSocket);
 
         // 클라이언트 세션을 새로운 스레드에서 처리
         thread clientThread(&RequestHandler::handleRequest, requestHandler, clientSocket, &clientSession);

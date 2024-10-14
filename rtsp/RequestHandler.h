@@ -18,10 +18,12 @@ private:
     bool isAlive;
 
     // RTSP 요청 method 파싱
-    static string parseMethod(const string& request);
+    string parseMethod(const string& request);
 
     // RTSP 요청 CSeq 파싱
-    static int parseCSeq(const string& request);
+    int parseCSeq(const string& request);
+
+    pair<int, int> parsePorts(const string& request);
 
     // DESCRIBE 핸들 (SDP 전송)
     void handleOptionsRequest(int clientSocket, int cseq);
@@ -30,7 +32,7 @@ private:
     void handleDescribeRequest(int clientSocket, int cseq, ClientSession* session);
 
     // PLAY 핸들
-    void handleSetupRequest(int clientSocket, int cseq, ClientSession* session);
+    void handleSetupRequest(int clientSocket, int cseq, ClientSession* session, const string& request);
 
     // Handle PLAY request (starts streaming the media)
     void handlePlayRequest(int clientSocket, int cseq, ClientSession* session);

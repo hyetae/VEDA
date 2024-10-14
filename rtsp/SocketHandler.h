@@ -19,7 +19,7 @@ public:
     ~SocketHandler();
 
     // TCP 소켓 초기화
-    int initSocket(char* ip, int tcpPort, int rtpPort, int rtcpPort);
+    int initSocket(char* ip, int tcpPort);
 
     int createSocket(char* ip, int port, sockaddr_in& addr);
 

@@ -17,7 +17,7 @@ SocketHandler::~SocketHandler() {
 }
 
 // TCP 소켓 초기화
-int SocketHandler::initSocket(char* ip, int tcpPort, int rtpPort, int rtcpPort) {
+int SocketHandler::initSocket(char* ip, int tcpPort) {
     tcpSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (tcpSocket == -1) {
         cerr << "Failed to create TCP socket\n";
@@ -29,8 +29,8 @@ int SocketHandler::initSocket(char* ip, int tcpPort, int rtpPort, int rtcpPort) 
     tcpAddr.sin_addr.s_addr = INADDR_ANY;
     tcpAddr.sin_port = htons(tcpPort);
 
-    rtpSocket = createSocket(ip, rtpPort, rtpAddr);
-    rtcpSocket = createSocket(ip, rtcpPort, rtcpAddr);
+//    rtpSocket = createSocket(ip, rtpPort, rtpAddr);
+//    rtcpSocket = createSocket(ip, rtcpPort, rtcpAddr);
 
     if (::bind(tcpSocket, (struct sockaddr*)&tcpAddr, sizeof(tcpAddr)) == -1) {
         cerr << "Failed to bind TCP socket\n";

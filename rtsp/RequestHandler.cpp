@@ -35,7 +35,7 @@ void RequestHandler::handleRequest(int clientSocket, ClientSession* session) {
         } else if (method == "DESCRIBE") {
             handleDescribeRequest(clientSocket, cseq, session);
         } else if (method == "SETUP") {
-            handleSetupRequest(clientSocket, cseq, session);
+            handleSetupRequest(clientSocket, cseq, session, request);
         } else if (method == "PLAY") {
             handlePlayRequest(clientSocket, cseq, session);
         } else if (method == "PAUSE") {
@@ -72,6 +72,33 @@ int RequestHandler::parseCSeq(const string& request) {
     return -1; // CSeq not found
 }
 
+pair<int, int> RequestHandler::parsePorts(const string& request) {
+    istringstream requestStream(request);
+    string line;
+    while (getline(requestStream, line)) {
+        if (line.find("client_port=") != string::npos) {
+            istringstream lineStream(line);
+            string label;
+
+            while (getline(lineStream, label, '=')) {
+                if (label == "client_port") {
+                    string portRange;
+                    getline(lineStream, portRange);  // 포트 범위 읽기
+                    size_t dashPos = portRange.find('-');
+
+                    // '-'로 구분된 포트 추출
+                    if (dashPos != string::npos) {
+                        int rtpPort = stoi(portRange.substr(0, dashPos));      // RTP 포트
+                        int rtcpPort = stoi(portRange.substr(dashPos + 1));   // RTCP 포트
+                        return {rtpPort, rtcpPort};
+                    }
+                }
+            }
+        }
+    }
+    return {-1, -1};
+}
+
 // OPTIONS 핸들
 void RequestHandler::handleOptionsRequest(int clientSocket, int cseq) {
     string response = "RTSP/1.0 200 OK\r\n"
@@ -106,9 +133,17 @@ void RequestHandler::handleDescribeRequest(int clientSocket, int cseq, ClientSes
 }
 
 // SETUP 핸들 (RTP/RTCP 스레드 생성)
-void RequestHandler::handleSetupRequest(int clientSocket, int cseq, ClientSession* session) {
+void RequestHandler::handleSetupRequest(int clientSocket, int cseq, ClientSession* session, const string& request) {
     // RTP, RTCP 포트와 주소 설정
     session->setState("SETUP");
+
+    auto ports = parsePorts(request);
+    if (ports.first < 0 || ports.second < 0) {
+        cerr << "클라이언트 포트가 없습니다" << endl;
+        return;
+    }
+
+    session->setPort(ports.first, ports.second);
 
     string response = "RTSP/1.0 200 OK\r\n"
                            "CSeq: " + to_string(cseq) + "\r\n"
