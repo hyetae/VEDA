@@ -11,6 +11,7 @@ public:
     static uint64_t getTime();
     static uint16_t genSeqNum();
     static uint32_t genSSRC();
+    static string getIP();
 };
 
 #endif //RTSP_UTILS_H

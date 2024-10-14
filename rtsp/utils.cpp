@@ -1,5 +1,12 @@
 #include <chrono>
 #include <random>
+#include <iostream>
+#include <cstring>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <arpa/inet.h>
 #include "utils.h"
 
 using namespace std;
@@ -31,4 +38,30 @@ uint32_t utils::genSSRC() {
 
     // 32비트 랜덤 SSRC 값 생성
     return distribution(generator);
+}
+
+string utils::getIP() {
+    char hostbuffer[256];
+    char *IPbuffer;
+    struct hostent *host_entry;
+    int hostname;
+
+    // Get the hostname
+    hostname = gethostname(hostbuffer, sizeof(hostbuffer));
+    if (hostname == -1) {
+        perror("gethostname");
+        return "";
+    }
+
+    // Get host information
+    host_entry = gethostbyname(hostbuffer);
+    if (host_entry == nullptr) {
+        perror("gethostbyname");
+        return "";
+    }
+
+    // Convert the host's binary address into text form
+    IPbuffer = inet_ntoa(*((struct in_addr *) host_entry->h_addr_list[0]));
+
+    return std::string(IPbuffer);
 }

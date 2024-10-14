@@ -83,21 +83,22 @@ void RequestHandler::handleOptionsRequest(int clientSocket, int cseq) {
 
 // DESCRIBE 핸들 (SDP 전송)
 void RequestHandler::handleDescribeRequest(int clientSocket, int cseq, ClientSession* session) {
+    string ip = utils::getIP();
     string sdp = "v=0\r\n"
                       "o=- "
                       + to_string(session->getSessionId())
                       + " " + to_string(session->getVersion())
-                      + " IN IP4 127.0.0.1\r\n"
-                      "s=Stream\r\n"
-                      "c=IN IP4 127.0.0.1\r\n"
-                      "t=" + to_string(utils::getTime().first) + " 0\r\n"
+                      + " IN IP4 " + ip + "\r\n"
+                      "s=Audio Stream\r\n"
+                      "c=IN IP4 " + ip + "\r\n"
+                      "t=" + to_string(utils::getTime()) + " 0\r\n"
                       "m=video " + to_string(session->getPort().first)
                       + " RTP/AVP 96\r\n"
-                      "a=rtpmap:96 H264/90000\r\n";
+                      "a=rtpmap:0 PCMU/8000\r\n";
 
     string response = "RTSP/1.0 200 OK\r\n"
                            "CSeq: " + to_string(cseq) + "\r\n"
-                           "Content-Base: rtsp://127.0.0.1:8554/\r\n"
+                           "Content-Base: rtsp://" + ip + ":8554/\r\n"
                            "Content-Type: application/sdp\r\n"
                            "Content-Length: " + to_string(sdp.size()) + "\r\n"
                                                                              "\r\n" + sdp;
