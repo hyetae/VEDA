@@ -11,13 +11,11 @@ uint64_t utils::getTime() {
 //    return static_cast<unsigned long long>(now) + SECONDS_FROM_1900_TO_1970;
 
     auto now = chrono::system_clock::now();
-    auto ms_since_epoch = chrono::duration_cast<chrono::milliseconds>(now.time_since_epoch()).count();
-    uint32_t ntpSeconds = (ms_since_epoch / 1000) + 2208988800U; // 1970 to 1900
-    uint32_t ntpFraction = (ms_since_epoch % 1000) * 4294967;
-
-    uint64_t ntp_time = ((uint64_t)ntp_seconds << 32) | ntp_fraction;
-
-    return ntp_time;
+    auto msSinceEpoch = chrono::duration_cast<chrono::milliseconds>(now.time_since_epoch()).count();
+    uint32_t ntpSeconds = (msSinceEpoch / 1000) + 2208988800U; // 1970 to 1900
+    uint32_t ntpFraction = (msSinceEpoch % 1000) * 4294967;
+    uint64_t ntpTime = ((uint64_t)ntpSeconds << 32) | ntpFraction;
+    return ntpTime;
 }
 
 uint16_t utils::genSeqNum() {
