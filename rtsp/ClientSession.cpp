@@ -1,13 +1,13 @@
 #include "ClientSession.h"
-
+#include "utils.h"
 #include <iostream>
 #include <string>
 #include <mutex>
 
 using namespace std;
 
-ClientSession::ClientSession(int sessionId, int tcpSocket)
-        : sessionId(sessionId), tcpSocket(tcpSocket), version(1), state("INIT") {
+ClientSession::ClientSession(SocketHandler& socketHandler, int sessionId, int tcpSocket)
+        : socketHandler(socketHandler), sessionId(sessionId), tcpSocket(tcpSocket), version(1), state("INIT") {
     lastActivity = chrono::system_clock::now();
 }
 
@@ -25,6 +25,8 @@ pair<int, int> ClientSession::getPort() const { return {rtpPort, rtcpPort}; }
 void ClientSession::setPort(int port1, int port2) {
     rtpPort = port1;
     rtcpPort = port2;
+
+    socketHandler.createUDPSocket(utils::getIP(), rtpPort, rtcpPort);
 }
 
 // 클라이언트 상태 설정 (SETUP, PLAY, PAUSE 등)

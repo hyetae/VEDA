@@ -81,17 +81,17 @@ pair<int, int> RequestHandler::parsePorts(const string& request) {
             string label;
 
             while (getline(lineStream, label, '=')) {
-                if (label == "client_port") {
-                    string portRange;
-                    getline(lineStream, portRange);  // 포트 범위 읽기
-                    size_t dashPos = portRange.find('-');
+                string portRange;
+                getline(lineStream, portRange);  // 포트 범위 읽기
+                size_t dashPos = portRange.find('-');
 
-                    // '-'로 구분된 포트 추출
-                    if (dashPos != string::npos) {
-                        int rtpPort = stoi(portRange.substr(0, dashPos));      // RTP 포트
-                        int rtcpPort = stoi(portRange.substr(dashPos + 1));   // RTCP 포트
-                        return {rtpPort, rtcpPort};
-                    }
+                // '-'로 구분된 포트 추출
+                if (dashPos != string::npos) {
+                    int rtpPort = stoi(portRange.substr(0, dashPos));      // RTP 포트
+                    int rtcpPort = stoi(portRange.substr(dashPos + 1));   // RTCP 포트
+                    cout << "rtpPort: " << rtpPort << endl;
+                    cout << "rtcpPort: " << rtcpPort << endl;
+                    return {rtpPort, rtcpPort};
                 }
             }
         }

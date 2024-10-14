@@ -1,6 +1,7 @@
 #ifndef RTSP_CLIENTSESSION_H
 #define RTSP_CLIENTSESSION_H
 
+#include "SocketHandler.h"
 #include <iostream>
 #include <string>
 #include <map>
@@ -12,7 +13,7 @@ using namespace std;
 
 class ClientSession {
 public:
-    ClientSession(int sessionId, int tcpSocket);
+    ClientSession(SocketHandler& socketHandler, int sessionId, int tcpSocket);
 
     // 세션 ID 반환
     int getSessionId() const;
@@ -45,6 +46,8 @@ public:
     void logSessionActivity(const string& activity);
 
 private:
+    SocketHandler& socketHandler;
+
     int sessionId;                    // 세션 ID
     int tcpSocket;                    // TCP 소켓 핸들
     int rtpPort, rtcpPort;            // RTP/RTCP 포트 정보

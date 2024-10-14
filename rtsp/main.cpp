@@ -18,7 +18,7 @@ int main() {
     auto socketHandler = SocketHandler();
 
     // SocketHandler 초기화
-    int tcpSocket = socketHandler.initSocket(DEST_IP, TCP_PORT);
+    int tcpSocket = socketHandler.initSocket(TCP_PORT);
     if (tcpSocket < 0) {
         cerr << "RTSP 서버 소켓 초기화 실패" << endl;
         return -1;
@@ -38,7 +38,7 @@ int main() {
 //        auto sessionHandler = new SessionHandler();
         auto mediaStreamHandler = MediaStreamHandler(socketHandler);
         auto requestHandler = RequestHandler(socketHandler, mediaStreamHandler);
-        auto clientSession = ClientSession(sessionNum++, tcpSocket);
+        auto clientSession = ClientSession(socketHandler, sessionNum++, tcpSocket);
 
         // 클라이언트 세션을 새로운 스레드에서 처리
         thread clientThread(&RequestHandler::handleRequest, requestHandler, clientSocket, &clientSession);

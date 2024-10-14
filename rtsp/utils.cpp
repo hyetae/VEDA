@@ -38,7 +38,7 @@ uint32_t utils::genSSRC() {
     return distribution(generator);
 }
 
-string utils::getIP() {
+char* utils::getIP() {
     char hostbuffer[256];
     char *IPbuffer;
     struct hostent *host_entry;
@@ -61,5 +61,5 @@ string utils::getIP() {
     // Convert the host's binary address into text form
     IPbuffer = inet_ntoa(*((struct in_addr *) host_entry->h_addr_list[0]));
 
-    return std::string(IPbuffer);
+    return IPbuffer;
 }

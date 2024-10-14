@@ -17,7 +17,7 @@ SocketHandler::~SocketHandler() {
 }
 
 // TCP 소켓 초기화
-int SocketHandler::initSocket(char* ip, int tcpPort) {
+int SocketHandler::initSocket(int tcpPort) {
     tcpSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (tcpSocket == -1) {
         cerr << "Failed to create TCP socket\n";
@@ -28,9 +28,6 @@ int SocketHandler::initSocket(char* ip, int tcpPort) {
     tcpAddr.sin_family = AF_INET;
     tcpAddr.sin_addr.s_addr = INADDR_ANY;
     tcpAddr.sin_port = htons(tcpPort);
-
-//    rtpSocket = createSocket(ip, rtpPort, rtpAddr);
-//    rtcpSocket = createSocket(ip, rtcpPort, rtcpAddr);
 
     if (::bind(tcpSocket, (struct sockaddr*)&tcpAddr, sizeof(tcpAddr)) == -1) {
         cerr << "Failed to bind TCP socket\n";
@@ -46,19 +43,30 @@ int SocketHandler::initSocket(char* ip, int tcpPort) {
     return tcpSocket;
 }
 
-int SocketHandler::createSocket(char* ip, int port, sockaddr_in& addr) {
-    int sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock == -1) {
-        cerr << "Failed to create socket: " << port << endl;
-        return -1;
+bool SocketHandler::createUDPSocket(char* ip, int port1, int port2) {
+    rtpSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (rtpSocket == -1) {
+        cerr << "Failed to create socket: " << port1 << endl;
+        return false;
     }
 
-    memset(&addr, 0, sizeof(addr));
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(port);
-    inet_pton(AF_INET, ip, &addr.sin_addr);
+    rtcpSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (rtcpSocket == -1) {
+        cerr << "Failed to create socket: " << port2 << endl;
+        return false;
+    }
 
-    return sock;
+    memset(&rtpAddr, 0, sizeof(rtpAddr));
+    rtpAddr.sin_family = AF_INET;
+    rtpAddr.sin_port = htons(port1);
+    inet_pton(AF_INET, ip, &rtpAddr.sin_addr);
+
+    memset(&rtcpAddr, 0, sizeof(rtcpAddr));
+    rtcpAddr.sin_family = AF_INET;
+    rtcpAddr.sin_port = htons(port2);
+    inet_pton(AF_INET, ip, &rtcpAddr.sin_addr);
+
+    return true;
 }
 
 // 클라이언트 접속 (blocking)

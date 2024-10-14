@@ -19,9 +19,9 @@ public:
     ~SocketHandler();
 
     // TCP 소켓 초기화
-    int initSocket(char* ip, int tcpPort);
+    int initSocket(int tcpPort);
 
-    int createSocket(char* ip, int port, sockaddr_in& addr);
+    bool createUDPSocket(char* ip, int port1, int port2);
 
     // 클라이언트 접속 (blocking)
     int acceptClientConnection();
@@ -50,4 +50,3 @@ private:
 };
 
 #endif //RTSP_SOCKETHANDLER_H
-
