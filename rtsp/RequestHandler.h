@@ -7,13 +7,12 @@
 
 class RequestHandler {
 public:
-    RequestHandler(SocketHandler& socketHandler, MediaStreamHandler& mediaStreamHandler);
+    RequestHandler(MediaStreamHandler& mediaStreamHandler);
 
     // RTSP 요청 처리
     void handleRequest(int clientSocket, ClientSession* session);
 
 private:
-    SocketHandler& socketHandler;
     MediaStreamHandler& mediaStreamHandler;
     bool isAlive;
 

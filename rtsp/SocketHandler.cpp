@@ -8,7 +8,9 @@
 
 using namespace std;
 
-SocketHandler::SocketHandler(): tcpSocket(-1), rtpSocket(-1), rtcpSocket(-1) {}
+SocketHandler::SocketHandler(): tcpPort(8554), tcpSocket(-1), rtpSocket(-1), rtcpSocket(-1) {
+    createTCPSocket();
+}
 
 SocketHandler::~SocketHandler() {
     if (tcpSocket != -1) close(tcpSocket);
@@ -17,11 +19,11 @@ SocketHandler::~SocketHandler() {
 }
 
 // TCP 소켓 초기화
-int SocketHandler::initSocket(int tcpPort) {
+bool SocketHandler::createTCPSocket() {
     tcpSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (tcpSocket == -1) {
         cerr << "Failed to create TCP socket\n";
-        return -1;
+        return false;
     }
 
     memset(&tcpAddr, 0, sizeof(tcpAddr));
@@ -31,16 +33,15 @@ int SocketHandler::initSocket(int tcpPort) {
 
     if (::bind(tcpSocket, (struct sockaddr*)&tcpAddr, sizeof(tcpAddr)) == -1) {
         cerr << "Failed to bind TCP socket\n";
-        return -1;
+        return false;
     }
 
     if (listen(tcpSocket, 10) == -1) {
         cerr << "Failed to listen on TCP socket\n";
-        return -1;
+        return false;
     }
 
-//    cout << "TCP socket initialized on port " << RTSP_PORT << endl;
-    return tcpSocket;
+    return true;
 }
 
 bool SocketHandler::createUDPSocket(char* ip, int port1, int port2) {
@@ -131,3 +132,11 @@ void SocketHandler::sendSenderReport(Protos::SenderReport* senderReport) {
 
 //    cout << "Sent RTCP response:\n" << response << endl;
 }
+
+int& SocketHandler::getTCPSocket() { return tcpSocket; }
+int& SocketHandler::getRTPSocket() { return rtpSocket; }
+int& SocketHandler::getRTCPSocket() { return rtcpSocket; }
+
+sockaddr_in& SocketHandler::getTCPAddr() { return tcpAddr; }
+sockaddr_in& SocketHandler::getRTPAddr() { return rtpAddr; }
+sockaddr_in& SocketHandler::getRTCPAddr() { return rtcpAddr; }

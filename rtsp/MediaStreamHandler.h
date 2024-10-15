@@ -10,7 +10,7 @@ using namespace std;
 
 class MediaStreamHandler {
 public:
-    MediaStreamHandler(SocketHandler& socketHandler);
+    MediaStreamHandler();
 
     void handleMediaStream();
 
@@ -23,7 +23,6 @@ public:
     void teardown();
 
 private:
-    SocketHandler& socketHandler;
     atomic<bool> isStreaming;
     atomic<bool> isPaused;
 

@@ -6,16 +6,18 @@
 #include <sstream>
 #include <thread>
 
+#define SOCK SocketHandler::getInstance()
+
 using namespace std;
 
-RequestHandler::RequestHandler(SocketHandler& socketHandler, MediaStreamHandler& mediaStreamHandler)
-        : socketHandler(socketHandler), mediaStreamHandler(mediaStreamHandler), isAlive(true) {}
+RequestHandler::RequestHandler(MediaStreamHandler& mediaStreamHandler)
+        : mediaStreamHandler(mediaStreamHandler), isAlive(true) {}
 
 // RTSP 요청 처리
 void RequestHandler::handleRequest(int clientSocket, ClientSession* session) {
     cout << "클라이언트 스레드 생성" << endl;
     while (isAlive) {
-        string request = socketHandler.receiveRTSPRequest(clientSocket);
+        string request = SOCK.receiveRTSPRequest(clientSocket);
         if (request.empty()) {
             cerr << "Invalid RTSP request received." << endl;
             return;
@@ -103,7 +105,7 @@ void RequestHandler::handleOptionsRequest(int clientSocket, int cseq) {
                            "CSeq: " + to_string(cseq) + "\r\n"
                            "Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE\r\n"
                            "\r\n";
-    socketHandler.sendRTSPResponse(clientSocket, response);
+    SOCK.sendRTSPResponse(clientSocket, response);
 }
 
 // DESCRIBE 핸들 (SDP 전송)
@@ -127,7 +129,7 @@ void RequestHandler::handleDescribeRequest(int clientSocket, int cseq, ClientSes
                            "Content-Type: application/sdp\r\n"
                            "Content-Length: " + to_string(sdp.size()) + "\r\n"
                                                                              "\r\n" + sdp;
-    socketHandler.sendRTSPResponse(clientSocket, response);
+    SOCK.sendRTSPResponse(clientSocket, response);
 }
 
 // SETUP 핸들 (RTP/RTCP 스레드 생성)
@@ -151,7 +153,7 @@ void RequestHandler::handleSetupRequest(int clientSocket, int cseq, ClientSessio
                            "Session: " + to_string(session->getSessionId())
                            + "\r\n"
                              "\r\n";
-    socketHandler.sendRTSPResponse(clientSocket, response);
+    SOCK.sendRTSPResponse(clientSocket, response);
 
     // RTP-RTCP 스트리밍 스레드
     thread mediaStreamThread(&MediaStreamHandler::handleMediaStream, &mediaStreamHandler);
@@ -168,7 +170,7 @@ void RequestHandler::handlePlayRequest(int clientSocket, int cseq, ClientSession
                            "Session: " + to_string(session->getSessionId())
                            + "\r\n"
                              "\r\n";
-    socketHandler.sendRTSPResponse(clientSocket, response);
+    SOCK.sendRTSPResponse(clientSocket, response);
 
     // 실제 RTP 스트리밍 시작 (예시)
     mediaStreamHandler.playStreaming();
@@ -184,7 +186,7 @@ void RequestHandler::handlePauseRequest(int clientSocket, int cseq, ClientSessio
                            + "\r\n"
                              "\r\n";
 
-    socketHandler.sendRTSPResponse(clientSocket, response);
+    SOCK.sendRTSPResponse(clientSocket, response);
 
     // RTP 스트리밍 일시 중지
     mediaStreamHandler.pauseStreaming();
@@ -201,7 +203,7 @@ void RequestHandler::handleTeardownRequest(int clientSocket, int cseq, ClientSes
                            + "\r\n"
                              "\r\n";
 
-    socketHandler.sendRTSPResponse(clientSocket, response);
+    SOCK.sendRTSPResponse(clientSocket, response);
 
     // 세션 종료 로직
     mediaStreamHandler.teardown();

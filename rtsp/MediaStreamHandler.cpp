@@ -14,10 +14,12 @@
 #include <utility>
 #include <random>
 
+#define SOCK SocketHandler::getInstance()
+
 using namespace std;
 
-MediaStreamHandler::MediaStreamHandler(SocketHandler& socketHandler)
-            : socketHandler(socketHandler), isStreaming(false), isPaused(false) {}
+MediaStreamHandler::MediaStreamHandler()
+            : isStreaming(false), isPaused(false) {}
 
 // RTP 및 RTCP를 주기적으로 처리하는 루프
 void MediaStreamHandler::handleMediaStream() {
@@ -64,7 +66,7 @@ void MediaStreamHandler::handleMediaStream() {
 
 	        cout << "RTP " << packetCount << "sent" << endl;
 
-            socketHandler.sendRTPPacket(rtpPacket);
+            SOCK.sendRTPPacket(rtpPacket);
 
             // 카운터 업데이트
             seqNum++;
@@ -76,7 +78,7 @@ void MediaStreamHandler::handleMediaStream() {
             if (packetCount % 10 == 0) {
                 cout << "RTCP sent" << endl;
                 protos.createSR(timestamp, packetCount, octetCount, &sr);
-                socketHandler.sendSenderReport(&sr);
+                SOCK.sendSenderReport(&sr);
             }
 	    }
         this_thread::sleep_for(std::chrono::milliseconds(20));  // 20ms 지연 (50 패킷/초)

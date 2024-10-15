@@ -2,24 +2,19 @@
 #define RTSP_SOCKETHANDLER_H
 
 #include "Protos.h"
-#include <iostream>
-#include <string>
-#include <cstring>
-#include <sys/socket.h>
 #include <arpa/inet.h>
-#include <unistd.h>
-#include <netdb.h>
-#include <vector>
 
 using namespace std;
 
 class SocketHandler {
 public:
-    SocketHandler();
-    ~SocketHandler();
+    static SocketHandler& getInstance() {
+        static SocketHandler instance;
+        return instance;
+    }
 
     // TCP 소켓 초기화
-    int initSocket(int tcpPort);
+    bool createTCPSocket();
 
     bool createUDPSocket(char* ip, int port1, int port2);
 
@@ -38,8 +33,20 @@ public:
     // RTCP 응답
     void sendSenderReport(Protos::SenderReport* senderReport);
 
-private:
+    int& getTCPSocket();
+    int& getRTPSocket();
+    int& getRTCPSocket();
 
+    sockaddr_in& getTCPAddr();
+    sockaddr_in& getRTPAddr();
+    sockaddr_in& getRTCPAddr();
+
+
+private:
+    SocketHandler();
+    ~SocketHandler();
+
+    int tcpPort;
     int tcpSocket;  // TCP socket for RTSP communication
     int rtpSocket;  // UDP socket for RTP packets
     int rtcpSocket; // UDP socket for RTCP packets
@@ -47,6 +54,7 @@ private:
     sockaddr_in tcpAddr;
     sockaddr_in rtpAddr;
     sockaddr_in rtcpAddr;
+
 };
 
 #endif //RTSP_SOCKETHANDLER_H

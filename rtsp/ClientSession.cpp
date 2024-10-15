@@ -4,10 +4,12 @@
 #include <string>
 #include <mutex>
 
+#define SOCK SocketHandler::getInstance()
+
 using namespace std;
 
-ClientSession::ClientSession(SocketHandler& socketHandler, int sessionId, int tcpSocket)
-        : socketHandler(socketHandler), sessionId(sessionId), tcpSocket(tcpSocket), version(1), state("INIT") {
+ClientSession::ClientSession(int sessionId)
+        : sessionId(sessionId), version(1), state("INIT") {
     lastActivity = chrono::system_clock::now();
 }
 
@@ -26,7 +28,7 @@ void ClientSession::setPort(int port1, int port2) {
     rtpPort = port1;
     rtcpPort = port2;
 
-    socketHandler.createUDPSocket(utils::getIP(), rtpPort, rtcpPort);
+    SOCK.createUDPSocket(utils::getIP(), rtpPort, rtcpPort);
 }
 
 // 클라이언트 상태 설정 (SETUP, PLAY, PAUSE 등)

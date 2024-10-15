@@ -13,7 +13,7 @@ using namespace std;
 
 class ClientSession {
 public:
-    ClientSession(SocketHandler& socketHandler, int sessionId, int tcpSocket);
+    ClientSession(int sessionId);
 
     // 세션 ID 반환
     int getSessionId() const;
@@ -30,26 +30,8 @@ public:
     // 클라이언트 상태 설정 (SETUP, PLAY, PAUSE 등)
     void setState(const string& newState);
 
-    // 미디어 버퍼에 프레임 추가
-    void addFrameToBuffer(const string& frame);
-
-    // 미디어 버퍼에서 프레임 가져오기
-    string getFrameFromBuffer();
-
-    // 세션 타임아웃 확인
-    bool isSessionTimedOut();
-
-    // 세션 활성화 시간 업데이트
-    void updateLastActivity();
-
-    // 세션 로그 기록 (예시)
-    void logSessionActivity(const string& activity);
-
 private:
-    SocketHandler& socketHandler;
-
     int sessionId;                    // 세션 ID
-    int tcpSocket;                    // TCP 소켓 핸들
     int rtpPort, rtcpPort;            // RTP/RTCP 포트 정보
     int version;
     string state;                // 클라이언트 상태 (SETUP, PLAY, PAUSE 등)

@@ -5,9 +5,7 @@
 #include "RequestHandler.h"
 #include "SocketHandler.h"
 #include "MediaStreamHandler.h"
-
-#define TCP_PORT 8554
-#define DEST_IP "192.168.2.2"
+#define SOCK SocketHandler::getInstance()
 
 using namespace std;
 
@@ -15,30 +13,22 @@ int sessionNum = 1;
 
 int main() {
 
-    auto socketHandler = SocketHandler();
-
-    // SocketHandler 초기화
-    int tcpSocket = socketHandler.initSocket(TCP_PORT);
-    if (tcpSocket < 0) {
-        cerr << "RTSP 서버 소켓 초기화 실패" << endl;
-        return -1;
-    }
+    SOCK.createTCPSocket();
 
     cout << "RTSP 서버가 시작되었습니다. 클라이언트 접속을 기다리는 중..." << endl;
 
     while (true) {
         // 클라이언트 접속을 기다림
-        int clientSocket = socketHandler.acceptClientConnection();
+        int clientSocket = SOCK.acceptClientConnection();
         if (clientSocket == -1) {
             cerr << "클라이언트 접속 오류" << endl;
             continue; // 오류 시 다음 클라이언트 접속 대기
         }
         cout << "클라이언트 접속 완료" << endl;
 
-//        auto sessionHandler = new SessionHandler();
-        auto mediaStreamHandler = MediaStreamHandler(socketHandler);
-        auto requestHandler = RequestHandler(socketHandler, mediaStreamHandler);
-        auto clientSession = ClientSession(socketHandler, sessionNum++, tcpSocket);
+        auto mediaStreamHandler = MediaStreamHandler();
+        auto requestHandler = RequestHandler(mediaStreamHandler);
+        auto clientSession = ClientSession(sessionNum++);
 
         // 클라이언트 세션을 새로운 스레드에서 처리
         thread clientThread(&RequestHandler::handleRequest, requestHandler, clientSocket, &clientSession);
