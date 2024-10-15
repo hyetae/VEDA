@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <chrono>
 #include <random>
 #include <netdb.h>
 #include <iomanip>
@@ -26,4 +27,30 @@ uint32_t utils::getRanNum(int n) {
         return distribution(generator);
     }
     return 0;
+}
+
+char* utils::getIP() {
+    char hostbuffer[256];
+    char *IPbuffer;
+    struct hostent *host_entry;
+    int hostname;
+
+    // Get the hostname
+    hostname = gethostname(hostbuffer, sizeof(hostbuffer));
+    if (hostname == -1) {
+        perror("gethostname");
+        return "";
+    }
+
+    // Get host information
+    host_entry = gethostbyname(hostbuffer);
+    if (host_entry == nullptr) {
+        perror("gethostbyname");
+        return "";
+    }
+
+    // Convert the host's binary address into text form
+    IPbuffer = inet_ntoa(*((struct in_addr *) host_entry->h_addr_list[0]));
+
+    return IPbuffer;
 }
