@@ -121,45 +121,8 @@ CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o: \
  /usr/include/aarch64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/12/bits/charconv.h \
  /usr/include/c++/12/bits/basic_string.tcc \
- /home/hyetae/rtsp/SocketHandler.h /usr/include/c++/12/iostream \
- /usr/include/c++/12/ostream /usr/include/c++/12/ios \
- /usr/include/c++/12/exception /usr/include/c++/12/bits/exception_ptr.h \
- /usr/include/c++/12/bits/cxxabi_init_exception.h \
- /usr/include/c++/12/typeinfo /usr/include/c++/12/bits/nested_exception.h \
- /usr/include/c++/12/bits/ios_base.h /usr/include/c++/12/ext/atomicity.h \
- /usr/include/aarch64-linux-gnu/c++/12/bits/gthr.h \
- /usr/include/aarch64-linux-gnu/c++/12/bits/gthr-default.h \
- /usr/include/pthread.h /usr/include/sched.h \
- /usr/include/aarch64-linux-gnu/bits/sched.h \
- /usr/include/aarch64-linux-gnu/bits/types/struct_sched_param.h \
- /usr/include/aarch64-linux-gnu/bits/cpu-set.h /usr/include/time.h \
- /usr/include/aarch64-linux-gnu/bits/time.h \
- /usr/include/aarch64-linux-gnu/bits/timex.h \
- /usr/include/aarch64-linux-gnu/bits/types/struct_tm.h \
- /usr/include/aarch64-linux-gnu/bits/types/struct_itimerspec.h \
- /usr/include/aarch64-linux-gnu/bits/setjmp.h \
- /usr/include/aarch64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
- /usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h \
- /usr/include/aarch64-linux-gnu/c++/12/bits/atomic_word.h \
- /usr/include/aarch64-linux-gnu/sys/single_threaded.h \
- /usr/include/c++/12/bits/locale_classes.h \
- /usr/include/c++/12/bits/locale_classes.tcc \
- /usr/include/c++/12/system_error \
- /usr/include/aarch64-linux-gnu/c++/12/bits/error_constants.h \
- /usr/include/c++/12/stdexcept /usr/include/c++/12/streambuf \
- /usr/include/c++/12/bits/streambuf.tcc \
- /usr/include/c++/12/bits/basic_ios.h \
- /usr/include/c++/12/bits/locale_facets.h /usr/include/c++/12/cwctype \
- /usr/include/wctype.h /usr/include/aarch64-linux-gnu/bits/wctype-wchar.h \
- /usr/include/aarch64-linux-gnu/c++/12/bits/ctype_base.h \
- /usr/include/c++/12/bits/streambuf_iterator.h \
- /usr/include/aarch64-linux-gnu/c++/12/bits/ctype_inline.h \
- /usr/include/c++/12/bits/locale_facets.tcc \
- /usr/include/c++/12/bits/basic_ios.tcc \
- /usr/include/c++/12/bits/ostream.tcc /usr/include/c++/12/istream \
- /usr/include/c++/12/bits/istream.tcc /usr/include/c++/12/cstring \
- /usr/include/string.h /usr/include/strings.h \
- /usr/include/aarch64-linux-gnu/sys/socket.h \
+ /home/hyetae/rtsp/SocketHandler.h /usr/include/arpa/inet.h \
+ /usr/include/netinet/in.h /usr/include/aarch64-linux-gnu/sys/socket.h \
  /usr/include/aarch64-linux-gnu/bits/types/struct_iovec.h \
  /usr/include/aarch64-linux-gnu/bits/socket.h \
  /usr/include/aarch64-linux-gnu/bits/socket_type.h \
@@ -173,38 +136,59 @@ CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o: \
  /usr/lib/linux/uapi/arm64/asm/sockios.h \
  /usr/include/asm-generic/sockios.h \
  /usr/include/aarch64-linux-gnu/bits/types/struct_osockaddr.h \
- /usr/include/arpa/inet.h /usr/include/netinet/in.h \
- /usr/include/aarch64-linux-gnu/bits/in.h /usr/include/unistd.h \
- /usr/include/aarch64-linux-gnu/bits/posix_opt.h \
- /usr/include/aarch64-linux-gnu/bits/environments.h \
- /usr/include/aarch64-linux-gnu/bits/confname.h \
- /usr/include/aarch64-linux-gnu/bits/getopt_posix.h \
- /usr/include/aarch64-linux-gnu/bits/getopt_core.h \
- /usr/include/aarch64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h /usr/include/netdb.h \
- /usr/include/rpc/netdb.h \
- /usr/include/aarch64-linux-gnu/bits/types/sigevent_t.h \
- /usr/include/aarch64-linux-gnu/bits/types/__sigval_t.h \
- /usr/include/aarch64-linux-gnu/bits/netdb.h /usr/include/c++/12/vector \
- /usr/include/c++/12/bits/stl_uninitialized.h \
- /usr/include/c++/12/bits/stl_vector.h \
- /usr/include/c++/12/bits/stl_bvector.h \
- /usr/include/c++/12/bits/vector.tcc \
+ /usr/include/aarch64-linux-gnu/bits/in.h \
  /home/hyetae/rtsp/MediaStreamHandler.h \
  /usr/include/c++/12/condition_variable /usr/include/c++/12/bits/chrono.h \
  /usr/include/c++/12/ratio /usr/include/c++/12/limits \
- /usr/include/c++/12/ctime /usr/include/c++/12/bits/parse_numbers.h \
- /usr/include/c++/12/bits/std_mutex.h \
+ /usr/include/c++/12/ctime /usr/include/time.h \
+ /usr/include/aarch64-linux-gnu/bits/time.h \
+ /usr/include/aarch64-linux-gnu/bits/timex.h \
+ /usr/include/aarch64-linux-gnu/bits/types/struct_tm.h \
+ /usr/include/aarch64-linux-gnu/bits/types/struct_itimerspec.h \
+ /usr/include/c++/12/bits/parse_numbers.h \
+ /usr/include/c++/12/bits/std_mutex.h /usr/include/c++/12/system_error \
+ /usr/include/aarch64-linux-gnu/c++/12/bits/error_constants.h \
+ /usr/include/c++/12/stdexcept /usr/include/c++/12/exception \
+ /usr/include/c++/12/bits/exception_ptr.h \
+ /usr/include/c++/12/bits/cxxabi_init_exception.h \
+ /usr/include/c++/12/typeinfo /usr/include/c++/12/bits/nested_exception.h \
+ /usr/include/aarch64-linux-gnu/c++/12/bits/gthr.h \
+ /usr/include/aarch64-linux-gnu/c++/12/bits/gthr-default.h \
+ /usr/include/pthread.h /usr/include/sched.h \
+ /usr/include/aarch64-linux-gnu/bits/sched.h \
+ /usr/include/aarch64-linux-gnu/bits/types/struct_sched_param.h \
+ /usr/include/aarch64-linux-gnu/bits/cpu-set.h \
+ /usr/include/aarch64-linux-gnu/bits/setjmp.h \
+ /usr/include/aarch64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
+ /usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h \
  /usr/include/c++/12/bits/unique_lock.h \
  /usr/include/c++/12/bits/shared_ptr.h \
  /usr/include/c++/12/bits/shared_ptr_base.h \
  /usr/include/c++/12/bits/allocated_ptr.h \
  /usr/include/c++/12/bits/unique_ptr.h /usr/include/c++/12/tuple \
- /usr/include/c++/12/bits/uses_allocator.h \
+ /usr/include/c++/12/bits/uses_allocator.h /usr/include/c++/12/ostream \
+ /usr/include/c++/12/ios /usr/include/c++/12/bits/ios_base.h \
+ /usr/include/c++/12/ext/atomicity.h \
+ /usr/include/aarch64-linux-gnu/c++/12/bits/atomic_word.h \
+ /usr/include/aarch64-linux-gnu/sys/single_threaded.h \
+ /usr/include/c++/12/bits/locale_classes.h \
+ /usr/include/c++/12/bits/locale_classes.tcc \
+ /usr/include/c++/12/streambuf /usr/include/c++/12/bits/streambuf.tcc \
+ /usr/include/c++/12/bits/basic_ios.h \
+ /usr/include/c++/12/bits/locale_facets.h /usr/include/c++/12/cwctype \
+ /usr/include/wctype.h /usr/include/aarch64-linux-gnu/bits/wctype-wchar.h \
+ /usr/include/aarch64-linux-gnu/c++/12/bits/ctype_base.h \
+ /usr/include/c++/12/bits/streambuf_iterator.h \
+ /usr/include/aarch64-linux-gnu/c++/12/bits/ctype_inline.h \
+ /usr/include/c++/12/bits/locale_facets.tcc \
+ /usr/include/c++/12/bits/basic_ios.tcc \
+ /usr/include/c++/12/bits/ostream.tcc \
  /usr/include/c++/12/ext/aligned_buffer.h \
  /usr/include/c++/12/ext/concurrence.h /usr/include/c++/12/bit \
- /usr/include/c++/12/bits/align.h /usr/include/c++/12/stop_token \
- /usr/include/c++/12/atomic /usr/include/c++/12/bits/atomic_base.h \
+ /usr/include/c++/12/bits/align.h \
+ /usr/include/c++/12/bits/stl_uninitialized.h \
+ /usr/include/c++/12/stop_token /usr/include/c++/12/atomic \
+ /usr/include/c++/12/bits/atomic_base.h \
  /usr/include/c++/12/bits/atomic_lockfree_defines.h \
  /usr/include/c++/12/bits/atomic_wait.h /usr/include/c++/12/climits \
  /usr/lib/gcc/aarch64-linux-gnu/12/include/limits.h \
@@ -214,7 +198,14 @@ CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o: \
  /usr/include/linux/limits.h \
  /usr/include/aarch64-linux-gnu/bits/posix2_lim.h \
  /usr/include/aarch64-linux-gnu/bits/xopen_lim.h \
- /usr/include/aarch64-linux-gnu/bits/uio_lim.h /usr/include/syscall.h \
+ /usr/include/aarch64-linux-gnu/bits/uio_lim.h /usr/include/unistd.h \
+ /usr/include/aarch64-linux-gnu/bits/posix_opt.h \
+ /usr/include/aarch64-linux-gnu/bits/environments.h \
+ /usr/include/aarch64-linux-gnu/bits/confname.h \
+ /usr/include/aarch64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/aarch64-linux-gnu/bits/getopt_core.h \
+ /usr/include/aarch64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h /usr/include/syscall.h \
  /usr/include/aarch64-linux-gnu/sys/syscall.h \
  /usr/lib/linux/uapi/arm64/asm/unistd.h /usr/include/asm-generic/unistd.h \
  /usr/include/aarch64-linux-gnu/bits/syscall.h \
@@ -225,7 +216,8 @@ CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o: \
  /usr/include/aarch64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/aarch64-linux-gnu/bits/semaphore.h \
  /usr/include/alsa/asoundlib.h /usr/include/c++/12/stdlib.h \
- /usr/include/fcntl.h /usr/include/aarch64-linux-gnu/bits/fcntl.h \
+ /usr/include/string.h /usr/include/strings.h /usr/include/fcntl.h \
+ /usr/include/aarch64-linux-gnu/bits/fcntl.h \
  /usr/include/aarch64-linux-gnu/bits/fcntl-linux.h \
  /usr/include/linux/falloc.h /usr/include/aarch64-linux-gnu/bits/stat.h \
  /usr/include/aarch64-linux-gnu/bits/struct_stat.h /usr/include/assert.h \
@@ -239,6 +231,8 @@ CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o: \
  /usr/include/alsa/control.h /usr/include/alsa/mixer.h \
  /usr/include/alsa/seq_event.h /usr/include/alsa/seq.h \
  /usr/include/alsa/seqmid.h /usr/include/alsa/seq_midi_event.h \
+ /usr/include/c++/12/iostream /usr/include/c++/12/istream \
+ /usr/include/c++/12/bits/istream.tcc /usr/include/c++/12/cstring \
  /usr/include/c++/12/chrono /usr/include/c++/12/sstream \
  /usr/include/c++/12/bits/sstream.tcc /usr/include/c++/12/thread \
  /usr/include/c++/12/mutex /usr/include/c++/12/random \
@@ -264,7 +258,10 @@ CMakeFiles/rtsp.dir/MediaStreamHandler.cpp.o: \
  /usr/include/c++/12/tr1/poly_hermite.tcc \
  /usr/include/c++/12/tr1/poly_laguerre.tcc \
  /usr/include/c++/12/tr1/riemann_zeta.tcc \
- /usr/include/c++/12/bits/random.h \
+ /usr/include/c++/12/bits/random.h /usr/include/c++/12/vector \
+ /usr/include/c++/12/bits/stl_vector.h \
+ /usr/include/c++/12/bits/stl_bvector.h \
+ /usr/include/c++/12/bits/vector.tcc \
  /usr/include/c++/12/bits/uniform_int_dist.h \
  /usr/include/aarch64-linux-gnu/c++/12/bits/opt_random.h \
  /usr/include/c++/12/bits/random.tcc /usr/include/c++/12/numeric \

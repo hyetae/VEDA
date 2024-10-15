@@ -23,19 +23,18 @@ uint64_t utils::getTime() {
     return ntpTime;
 }
 
-uint16_t utils::genSeqNum() {
-    srand((unsigned int)time(NULL));
-    return rand() % 65535;
-}
-
-uint32_t utils::genSSRC() {
+uint32_t utils::genRanNum(int n) {
     // 랜덤 숫자를 생성하는 엔진 (Mersenne Twister 엔진 사용)
     random_device rd; // 랜덤 시드 생성
     mt19937 generator(rd()); // 시드를 기반으로 난수 생성 엔진 초기화
-    uniform_int_distribution<uint32_t> distribution(0, 0xFFFFFFFF); // 0에서 2^32-1 범위의 난수 생성
-
-    // 32비트 랜덤 SSRC 값 생성
-    return distribution(generator);
+    if (n == 32) {
+        uniform_int_distribution<uint32_t> distribution(1, 0xFFFFFFFF); // 0에서 2^32-1 범위의 난수 생성
+        return distribution(generator);
+    } else if (n == 16) {
+        uniform_int_distribution<uint32_t> distribution(1, 65535);
+        return distribution(generator);
+    }
+    return 0;
 }
 
 char* utils::getIP() {

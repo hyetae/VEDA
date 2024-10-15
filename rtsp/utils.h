@@ -10,8 +10,7 @@ class utils {
 public:
     // 현재 시간
     static uint64_t getTime();
-    static uint16_t genSeqNum();
-    static uint32_t genSSRC();
+    static uint32_t genRanNum(int n);
     static char* getIP();
 };
 

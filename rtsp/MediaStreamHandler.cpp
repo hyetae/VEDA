@@ -23,7 +23,7 @@ MediaStreamHandler::MediaStreamHandler()
 
 // RTP 및 RTCP를 주기적으로 처리하는 루프
 void MediaStreamHandler::handleMediaStream() {
-    Protos protos(utils::genSeqNum(), utils::genSSRC());
+    Protos protos((uint16_t)utils::genRanNum(16), utils::genRanNum(32));
 
     snd_pcm_t* pcmHandle;
     snd_pcm_hw_params_t* params;
@@ -44,10 +44,10 @@ void MediaStreamHandler::handleMediaStream() {
         exit(1);
     }
 
-    unique_lock<std::mutex> lock(mtx);
+    unique_lock<mutex> lock(mtx);
 
     while (isStreaming) {
-        // 스트리밍을 재개하는 신호를 기다림
+        // 스트리밍을 시작하는 신호를 기다림
         condition.wait(lock, [this] { return !isPaused || !isStreaming; });
 
         if (!isStreaming) break;  // TEARDOWN 요청 시 종료
