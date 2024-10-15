@@ -3,7 +3,7 @@
 #include <cstring>
 #include <arpa/inet.h>
 #include <iostream>
-Protos::Protos(uint16_t seqNum, uint32_t ssrc): ssrc(ssrc) {}
+Protos::Protos(uint32_t ssrc): ssrc(ssrc) {}
 
 void Protos::createRTPPacket(unsigned short seqNum, unsigned int timestamp, unsigned char* packet, unsigned char* payload) {
     RTPHeader header;

@@ -23,7 +23,7 @@ MediaStreamHandler::MediaStreamHandler()
 
 // RTP 및 RTCP를 주기적으로 처리하는 루프
 void MediaStreamHandler::handleMediaStream() {
-    Protos protos((uint16_t)utils::genRanNum(16), utils::genRanNum(32));
+    Protos protos(utils::genRanNum(32));
 
     snd_pcm_t* pcmHandle;
     snd_pcm_hw_params_t* params;
@@ -33,8 +33,8 @@ void MediaStreamHandler::handleMediaStream() {
     int frames = payloadSize;  // G.711은 8kHz에서 20ms당 160 샘플
     auto buffer = new short[payloadSize];
     auto payload = new unsigned char[payloadSize];
-    unsigned short seqNum = 0;
-    unsigned int timestamp = 0;
+    unsigned short seqNum = (uint16_t)utils::genRanNum(16);
+    unsigned int timestamp = (uint16_t)utils::genRanNum(16);
     unsigned int packetCount = 0;
     unsigned int octetCount = 0;
 

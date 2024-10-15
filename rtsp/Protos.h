@@ -6,7 +6,7 @@
 
 class Protos {
 public:
-    Protos(uint16_t seqNum, uint32_t ssrc);
+    Protos(uint32_t ssrc);
 
     struct RTPHeader {
 #if __BYTE_ORDER == __LITTLE_ENDIAN
