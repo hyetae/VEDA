@@ -53,13 +53,11 @@ public:
         uint32_t senderOctetCount;
     } __attribute__((packed));
 
-    void createRTPPacket(unsigned short seqNum, unsigned int timestamp, unsigned char* packet, unsigned char* payload);
-    void createSR(unsigned int timestamp, unsigned int packetCount, unsigned int octetCount, SenderReport* sr);
+    void createRTPHeader(RTPHeader *header, unsigned short seqNum, unsigned int timestamp);
+    void createSR(SenderReport *sr, unsigned int timestamp, unsigned int packetCount, unsigned int octetCount);
 
 private:
-    size_t payloadSize;
     unsigned int ssrc;
-    uint32_t byteCount;
 };
 
 #endif //RTSP_PROTOS_H

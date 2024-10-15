@@ -2,7 +2,6 @@
 #include "utils.h"
 #include "SocketHandler.h"
 #include "MediaStreamHandler.h"
-
 #include <iostream>
 #include <cstdint>
 #include <cstring>
@@ -13,35 +12,37 @@
 #include <mutex>
 #include <utility>
 #include <random>
-
 #define SOCK SocketHandler::getInstance()
-
 using namespace std;
 
-MediaStreamHandler::MediaStreamHandler()
-            : isStreaming(false), isPaused(false) {}
+MediaStreamHandler::MediaStreamHandler(): isStreaming(false), isPaused(false) {}
 
-// RTP 및 RTCP를 주기적으로 처리하는 루프
 void MediaStreamHandler::handleMediaStream() {
-    Protos protos(utils::genRanNum(32));
+    Protos protos(utils::getRanNum(32));
 
     snd_pcm_t* pcmHandle;
     snd_pcm_hw_params_t* params;
     int rc, dir;
-    unsigned int sampleRate = 8000 ; // G.711의 샘플링 레이트
+
     size_t payloadSize = 160;  // 20ms당 160 샘플
     int frames = payloadSize;  // G.711은 8kHz에서 20ms당 160 샘플
+    unsigned int sampleRate = 8000 ; // G.711의 샘플링 레이트
+
     auto buffer = new short[payloadSize];
     auto payload = new unsigned char[payloadSize];
-    unsigned short seqNum = (unsigned short)utils::genRanNum(16);
-    unsigned int timestamp = (unsigned int)utils::genRanNum(16);
-    unsigned int packetCount = 1;
-    unsigned int octetCount = 1;
+
+    unsigned int octetCount = 0;
+    unsigned int packetCount = 0;
+    unsigned short seqNum = (unsigned short)utils::getRanNum(16);
+    unsigned int timestamp = (unsigned int)utils::getRanNum(16);
+
+    Protos::SenderReport sr;
+    Protos::RTPHeader rtpHeader;
 
     initAlsa(pcmHandle, params, rc, sampleRate, dir);
-        if (rc < 0) {
+    if (rc < 0) {
         fprintf(stderr, "ALSA initialization failed\n");
-        exit(1);
+        return;
     }
 
     unique_lock<mutex> lock(mtx);
@@ -52,44 +53,42 @@ void MediaStreamHandler::handleMediaStream() {
 
         if (!isStreaming) break;  // TEARDOWN 요청 시 종료
 
-        // RTP 패킷 전송 (예시)
         if (!isPaused) {
             unsigned char rtpPacket[sizeof(Protos::RTPHeader) + payloadSize];
-            Protos::SenderReport sr;
 
             if (captureAudio(pcmHandle, buffer, frames, rc, payload) < 0) {
                 cerr << "오디오 캡처 실패..." << endl;
                 break;
             }
 
-	        protos.createRTPPacket(seqNum, timestamp, rtpPacket, payload);
+            memset(rtpPacket, 0, sizeof(rtpPacket));
+            protos.createRTPHeader(&rtpHeader, seqNum, timestamp);
+            memcpy(rtpPacket, &rtpHeader, sizeof(rtpHeader));
+            memcpy(rtpPacket + sizeof(rtpHeader), payload, payloadSize);
 
-	        cout << "RTP " << packetCount << "sent" << endl;
+	        cout << "RTP " << packetCount << " sent" << endl;
 
-            SOCK.sendRTPPacket(rtpPacket);
+            SOCK.sendRTPPacket(rtpPacket, sizeof(rtpPacket));
 
-            // 카운터 업데이트
             seqNum++;
-            timestamp += payloadSize;  // G.711의 경우 8000 Hz, 160 샘플 = 20ms
+            timestamp += payloadSize;
             packetCount++;
             octetCount += payloadSize;
-	    
-            // 10 패킷마다 RTCP SR 전송
+
             if (packetCount % 10 == 0) {
                 cout << "RTCP sent" << endl;
-                protos.createSR(timestamp, packetCount, octetCount, &sr);
-                SOCK.sendSenderReport(&sr);
+                protos.createSR(&sr, timestamp, packetCount, octetCount);
+                SOCK.sendSenderReport(&sr, sizeof(sr));
             }
 	    }
-        this_thread::sleep_for(std::chrono::milliseconds(20));  // 20ms 지연 (50 패킷/초)
+        this_thread::sleep_for(std::chrono::milliseconds(20));
     }
-//    cout << "RTP/RTCP 스트리밍 종료" << endl;
 }
 
 unsigned char MediaStreamHandler::linearToUlaw(int sample) {
     const int MAX = 32767;
     const int BIAS = 0x84;
-    int sign = (sample >> 8) & 0x80; // Sign bit
+    int sign = (sample >> 8) & 0x80;
     if (sign != 0) sample = -sample;
     if (sample > MAX) sample = MAX;
     sample += BIAS;
@@ -108,7 +107,7 @@ void MediaStreamHandler::initAlsa(snd_pcm_t*& pcmHandle, snd_pcm_hw_params_t*& p
     rc = snd_pcm_open(&pcmHandle, "default", SND_PCM_STREAM_CAPTURE, 0);
     if (rc < 0) {
         fprintf(stderr, "Unable to open PCM device: %s\n", snd_strerror(rc));
-        return;  // exit 대신 함수 반환을 사용해 더 안전한 에러 처리
+        return;
     }
 
     // 하드웨어 매개변수 구조체 할당 및 기본값 설정
@@ -149,9 +148,6 @@ void MediaStreamHandler::initAlsa(snd_pcm_t*& pcmHandle, snd_pcm_hw_params_t*& p
         fprintf(stderr, "Unable to set HW parameters: %s\n", snd_strerror(rc));
         return;
     }
-
-    // 성공적으로 초기화 완료
-    printf("ALSA PCM device initialized with sample rate: %d\n", sampleRate);
 }
 
 int MediaStreamHandler::captureAudio(snd_pcm_t*& pcmHandle, short*& buffer, int& frames, int& rc, unsigned char*& payload) {
@@ -159,21 +155,20 @@ int MediaStreamHandler::captureAudio(snd_pcm_t*& pcmHandle, short*& buffer, int&
     rc = snd_pcm_readi(pcmHandle, buffer, frames);
     if (rc == -EPIPE) {
         // 오버런
-        fprintf(stderr, "Overrun occurred\n");
+        cerr << "Overrun occurred" << endl;
         snd_pcm_prepare(pcmHandle);
         return -1;
     } else if (rc < 0) {
-        fprintf(stderr, "Error from read: %s\n", snd_strerror(rc));
+        cerr << "Error from read: " << snd_strerror(rc) << endl;
         return -1;
     } else if (rc != frames) {
-        fprintf(stderr, "Short read, read %d frames\n", rc);
+        cerr << "Short read, read " << rc << " frames" << endl;
     }
 
-    // 캡처한 데이터를 G.711 µ-law으로 인코딩
     for (int i = 0; i < frames; i++)
         payload[i] = linearToUlaw(buffer[i]);
 
-    return 0;  // 정상적인 처리 시 0 반환
+    return 0;
 }
 
 void MediaStreamHandler::setCmd(const string& cmd) {

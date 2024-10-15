@@ -2,9 +2,8 @@
 #define RTSP_SOCKETHANDLER_H
 
 #include "Protos.h"
-#include <arpa/inet.h>
 #include <string>
-
+#include <arpa/inet.h>
 using namespace std;
 
 class SocketHandler {
@@ -14,25 +13,21 @@ public:
         return instance;
     }
 
-    // TCP 소켓 초기화
     bool createTCPSocket();
 
-    bool createUDPSocket(char* ip, int port1, int port2);
+    bool createUDPSocket(int port1, int port2);
 
-    // 클라이언트 접속 (blocking)
     int acceptClientConnection();
 
-    // RTSP 요청
     string receiveRTSPRequest(int clientSocket);
 
-    // RTSP 응답
     void sendRTSPResponse(int clientSocket, string& response);
 
-    // RTP 응답
-    void sendRTPPacket(unsigned char* rtpPacket);
+    void sendRTPPacket(unsigned char* rtpPacket, size_t packetSize);
 
-    // RTCP 응답
-    void sendSenderReport(Protos::SenderReport* senderReport);
+    void sendSenderReport(Protos::SenderReport* senderReport, size_t srSize);
+
+    void setUDPSocket(int port1, int port2);
 
     int& getTCPSocket();
     int& getRTPSocket();
@@ -48,14 +43,13 @@ private:
     ~SocketHandler();
 
     int tcpPort;
-    int tcpSocket;  // TCP socket for RTSP communication
-    int rtpSocket;  // UDP socket for RTP packets
-    int rtcpSocket; // UDP socket for RTCP packets
+    int tcpSocket;
+    int rtpSocket;
+    int rtcpSocket;
 
     sockaddr_in tcpAddr;
     sockaddr_in rtpAddr;
     sockaddr_in rtcpAddr;
-
 };
 
 #endif //RTSP_SOCKETHANDLER_H
