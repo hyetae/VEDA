@@ -33,10 +33,10 @@ void MediaStreamHandler::handleMediaStream() {
     int frames = payloadSize;  // G.711은 8kHz에서 20ms당 160 샘플
     auto buffer = new short[payloadSize];
     auto payload = new unsigned char[payloadSize];
-    unsigned short seqNum = (uint16_t)utils::genRanNum(16);
-    unsigned int timestamp = (uint16_t)utils::genRanNum(16);
-    unsigned int packetCount = 0;
-    unsigned int octetCount = 0;
+    unsigned short seqNum = (unsigned short)utils::genRanNum(16);
+    unsigned int timestamp = (unsigned int)utils::genRanNum(16);
+    unsigned int packetCount = 1;
+    unsigned int octetCount = 1;
 
     initAlsa(pcmHandle, params, rc, sampleRate, dir);
         if (rc < 0) {

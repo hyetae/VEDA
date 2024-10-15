@@ -46,11 +46,11 @@ public:
         uint8_t pt;
         uint16_t length;
         uint32_t ssrc;
-        uint32_t ntp_timestamp_msw;
-        uint32_t ntp_timestamp_lsw;
-        uint32_t rtp_timestamp;
-        uint32_t sender_packet_count;
-        uint32_t sender_octet_count;
+        uint32_t ntpTimestampMsw;
+        uint32_t ntpTimestampLsw;
+        uint32_t rtpTimestamp;
+        uint32_t senderPacketCount;
+        uint32_t senderOctetCount;
     } __attribute__((packed));
 
     void createRTPPacket(unsigned short seqNum, unsigned int timestamp, unsigned char* packet, unsigned char* payload);

@@ -33,9 +33,9 @@ void Protos::createSR(unsigned int timestamp, unsigned int packetCount, unsigned
     sr->ssrc = htonl(ssrc);
 
     auto time = utils::getTime();
-    sr->ntp_timestamp_msw = htonl((uint32_t)(time >> 32));
-    sr->ntp_timestamp_lsw = htonl((uint32_t)(time & 0xFFFFFFFF));
-    sr->rtp_timestamp = htonl(timestamp);
-    sr->sender_packet_count = htonl(packetCount);
-    sr->sender_octet_count = htonl(octetCount);
+    sr->ntpTimestampMsw = htonl((uint32_t)(time >> 32));
+    sr->ntpTimestampLsw = htonl((uint32_t)(time & 0xFFFFFFFF));
+    sr->rtpTimestamp = htonl(timestamp);
+    sr->senderPacketCount = htonl(packetCount);
+    sr->senderOctetCount = htonl(octetCount);
 }
