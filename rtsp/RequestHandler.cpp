@@ -173,7 +173,7 @@ void RequestHandler::handlePlayRequest(int clientSocket, int cseq, ClientSession
     SOCK.sendRTSPResponse(clientSocket, response);
 
     // 실제 RTP 스트리밍 시작 (예시)
-    mediaStreamHandler.playStreaming();
+    mediaStreamHandler.setCmd("PLAY");
 }
 
 // PAUSE 핸들
@@ -189,7 +189,7 @@ void RequestHandler::handlePauseRequest(int clientSocket, int cseq, ClientSessio
     SOCK.sendRTSPResponse(clientSocket, response);
 
     // RTP 스트리밍 일시 중지
-    mediaStreamHandler.pauseStreaming();
+    mediaStreamHandler.setCmd("PAUSE");
     isAlive = false;
 }
 
@@ -206,5 +206,5 @@ void RequestHandler::handleTeardownRequest(int clientSocket, int cseq, ClientSes
     SOCK.sendRTSPResponse(clientSocket, response);
 
     // 세션 종료 로직
-    mediaStreamHandler.teardown();
+    mediaStreamHandler.setCmd("TEARDOWN");
 }

@@ -176,28 +176,14 @@ int MediaStreamHandler::captureAudio(snd_pcm_t*& pcmHandle, short*& buffer, int&
     return 0;  // 정상적인 처리 시 0 반환
 }
 
-// 스트리밍 시작을 위한 상태 초기화 및 동작 시작
-void MediaStreamHandler::playStreaming() {
-    lock_guard<std::mutex> lock(mtx);
-    isStreaming = true;
-    isPaused = false;
-    condition.notify_all();  // 스트리밍 시작 신호
-    cout << "스트리밍 시작" << endl;
-}
-
-// PAUSE 요청 처리
-void MediaStreamHandler::pauseStreaming() {
-    lock_guard<std::mutex> lock(mtx);
-    if (!isPaused) {
+void MediaStreamHandler::setCmd(const string& cmd) {
+    lock_guard<mutex> lock(mtx);
+    if (cmd == "PLAY") {
+        isStreaming = true;
+        isPaused = false;
+    } else if (cmd == "PAUSE")
         isPaused = true;
-        cout << "스트리밍 일시정지" << endl;
-    }
-}
-
-// TEARDOWN 요청 처리 (스트리밍 중단)
-void MediaStreamHandler::teardown() {
-    lock_guard<std::mutex> lock(mtx);
-    isStreaming = false;
-    condition.notify_all();  // 모든 스레드 종료
-    cout << "스트리밍 중단" << endl;
+    else if (cmd == "TEARDOWN")
+        isStreaming = false;
+    condition.notify_all();
 }

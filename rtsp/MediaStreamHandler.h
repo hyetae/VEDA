@@ -18,9 +18,7 @@ public:
     void initAlsa(snd_pcm_t*& pcmHandle, snd_pcm_hw_params_t*& params, int& rc, unsigned int& sampleRate, int& dir);
     int captureAudio(snd_pcm_t*& pcmHandle, short*& buffer, int& frames, int& rc, unsigned char*& payload);
 
-    void playStreaming();
-    void pauseStreaming();
-    void teardown();
+    void setCmd(const string& cmd);
 
 private:
     atomic<bool> isStreaming;
