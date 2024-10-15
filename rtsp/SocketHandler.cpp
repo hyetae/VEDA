@@ -8,9 +8,7 @@
 
 using namespace std;
 
-SocketHandler::SocketHandler(): tcpPort(8554), tcpSocket(-1), rtpSocket(-1), rtcpSocket(-1) {
-    createTCPSocket();
-}
+SocketHandler::SocketHandler(): tcpPort(8554), tcpSocket(-1), rtpSocket(-1), rtcpSocket(-1) {}
 
 SocketHandler::~SocketHandler() {
     if (tcpSocket != -1) close(tcpSocket);

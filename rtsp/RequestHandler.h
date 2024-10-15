@@ -1,6 +1,6 @@
 #ifndef RTSP_REQUESTHANDLER_H
 #define RTSP_REQUESTHANDLER_H
-
+#include <string>
 #include "SocketHandler.h"
 #include "ClientSession.h"
 #include "MediaStreamHandler.h"

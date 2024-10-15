@@ -3,6 +3,7 @@
 
 #include "Protos.h"
 #include <arpa/inet.h>
+#include <string>
 
 using namespace std;
 
