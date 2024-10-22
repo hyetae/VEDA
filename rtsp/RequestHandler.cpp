@@ -13,7 +13,6 @@ using namespace std;
 RequestHandler::RequestHandler(MediaStreamHandler& mediaStreamHandler)
         : mediaStreamHandler(mediaStreamHandler), isAlive(true) {}
 
-// RTSP 요청 처리
 void RequestHandler::handleRequest(int clientSocket, ClientSession* session) {
     cout << "클라이언트 스레드 생성" << endl;
     while (isAlive) {
@@ -25,7 +24,6 @@ void RequestHandler::handleRequest(int clientSocket, ClientSession* session) {
 
         string method = parseMethod(request);
 
-        // CSeq 파싱
         int cseq = parseCSeq(request);
         if (cseq == -1) {
             cerr << "CSeq parsing failed." << endl;
@@ -35,7 +33,7 @@ void RequestHandler::handleRequest(int clientSocket, ClientSession* session) {
         if (method == "OPTIONS") {
             handleOptionsRequest(clientSocket, cseq);
         } else if (method == "DESCRIBE") {
-            handleDescribeRequest(clientSocket, cseq, session);
+            handleDescribeRequest(clientSocket, cseq, session, request);
         } else if (method == "SETUP") {
             handleSetupRequest(clientSocket, cseq, session, request);
         } else if (method == "PLAY") {
@@ -50,7 +48,6 @@ void RequestHandler::handleRequest(int clientSocket, ClientSession* session) {
     }
 }
 
-// RTSP 요청 method 파싱
 string RequestHandler::parseMethod(const string& request) {
     istringstream requestStream(request);
     string method;
@@ -58,7 +55,6 @@ string RequestHandler::parseMethod(const string& request) {
     return method;
 }
 
-// RTSP 요청 CSeq 파싱
 int RequestHandler::parseCSeq(const string& request) {
     istringstream requestStream(request);
     string line;
@@ -82,15 +78,14 @@ pair<int, int> RequestHandler::parsePorts(const string& request) {
             istringstream lineStream(line);
             string label;
 
-            while (getline(lineStream, label, '=')) {
+            while (getline(lineStream, label, '/')) {
                 string portRange;
-                getline(lineStream, portRange);  // 포트 범위 읽기
+                getline(lineStream, portRange);
                 size_t dashPos = portRange.find('-');
 
-                // '-'로 구분된 포트 추출
                 if (dashPos != string::npos) {
-                    int rtpPort = stoi(portRange.substr(0, dashPos));      // RTP 포트
-                    int rtcpPort = stoi(portRange.substr(dashPos + 1));   // RTCP 포트
+                    int rtpPort = stoi(portRange.substr(0, dashPos));
+                    int rtcpPort = stoi(portRange.substr(dashPos + 1));
 		    return {rtpPort, rtcpPort};
                 }
             }
@@ -99,7 +94,15 @@ pair<int, int> RequestHandler::parsePorts(const string& request) {
     return {-1, -1};
 }
 
-// OPTIONS 핸들
+bool RequestHandler::parseAccept(const string& request) {
+    istringstream requestStream(request);
+    string line;
+    while (getline(requestStream, line))
+        if (line.find("application/sdp") != string::npos)
+            return true;
+    return false;
+}
+
 void RequestHandler::handleOptionsRequest(int clientSocket, int cseq) {
     string response = "RTSP/1.0 200 OK\r\n"
                            "CSeq: " + to_string(cseq) + "\r\n"
@@ -108,33 +111,37 @@ void RequestHandler::handleOptionsRequest(int clientSocket, int cseq) {
     SOCK.sendRTSPResponse(clientSocket, response);
 }
 
-// DESCRIBE 핸들 (SDP 전송)
-void RequestHandler::handleDescribeRequest(int clientSocket, int cseq, ClientSession* session) {
-    string ip = utils::getIP();
-    string sdp = "v=0\r\n"
-                      "o=- "
-                      + to_string(session->getSessionId())
-                      + " " + to_string(session->getVersion())
-                      + " IN IP4 " + ip + "\r\n"
-                      "s=Audio Stream\r\n"
-                      "c=IN IP4 " + ip + "\r\n"
-                      "t=0 0\r\n"
-                      "m=audio " + to_string(session->getPort().first)
-                      + " RTP/AVP 0\r\n"
-                      "a=rtpmap:0 PCMU/8000\r\n";
+void RequestHandler::handleDescribeRequest(int clientSocket, int cseq, ClientSession* session, const string& request) {
+    string ip = "";
+    string sdp = "";
+    string response = "";
+    if (parseAccept(request)) {
+        response = "RTSP/1.0 200 OK\r\n";
 
-    string response = "RTSP/1.0 200 OK\r\n"
-                           "CSeq: " + to_string(cseq) + "\r\n"
-                           "Content-Base: rtsp://" + ip + ":8554/\r\n"
-                           "Content-Type: application/sdp\r\n"
-                           "Content-Length: " + to_string(sdp.size()) + "\r\n"
-                                                                             "\r\n" + sdp;
+        ip = utils::getIP();
+        sdp = "v=0\r\n"
+              "o=- "
+              + to_string(session->getSessionId())
+              + " " + to_string(session->getVersion())
+              + " IN IP4 " + ip + "\r\n"
+              "s=Audio Stream\r\n"
+              "c=IN IP4 " + ip + "\r\n"
+              "t=0 0\r\n"
+              "m=audio " + to_string(session->getPort().first)
+              + " RTP/AVP 0\r\n"
+                "a=rtpmap:0 PCMU/8000\r\n";
+    } else
+        response = "RTSP/1.0 406 Not Acceptable\r\n";
+
+    response += "CSeq: " + to_string(cseq) + "\r\n"
+                "Content-Base: rtsp://" + ip + ":8554/\r\n"
+                "Content-Type: application/sdp\r\n"
+                "Content-Length: " + to_string(sdp.size()) + "\r\n"
+                "\r\n" + sdp;
     SOCK.sendRTSPResponse(clientSocket, response);
 }
 
-// SETUP 핸들 (RTP/RTCP 스레드 생성)
 void RequestHandler::handleSetupRequest(int clientSocket, int cseq, ClientSession* session, const string& request) {
-    // RTP, RTCP 포트와 주소 설정
     session->setState("SETUP");
 
     auto ports = parsePorts(request);
@@ -155,13 +162,10 @@ void RequestHandler::handleSetupRequest(int clientSocket, int cseq, ClientSessio
                              "\r\n";
     SOCK.sendRTSPResponse(clientSocket, response);
 
-    // RTP-RTCP 스트리밍 스레드
     thread mediaStreamThread(&MediaStreamHandler::handleMediaStream, &mediaStreamHandler);
-    // 스레드 비동기적으로 실행
     mediaStreamThread.detach();
 }
 
-// PLAY 핸들
 void RequestHandler::handlePlayRequest(int clientSocket, int cseq, ClientSession* session) {
     session->setState("PLAY");
 
@@ -172,11 +176,9 @@ void RequestHandler::handlePlayRequest(int clientSocket, int cseq, ClientSession
                              "\r\n";
     SOCK.sendRTSPResponse(clientSocket, response);
 
-    // 실제 RTP 스트리밍 시작 (예시)
     mediaStreamHandler.setCmd("PLAY");
 }
 
-// PAUSE 핸들
 void RequestHandler::handlePauseRequest(int clientSocket, int cseq, ClientSession* session) {
     session->setState("PAUSE");
 
@@ -188,12 +190,10 @@ void RequestHandler::handlePauseRequest(int clientSocket, int cseq, ClientSessio
 
     SOCK.sendRTSPResponse(clientSocket, response);
 
-    // RTP 스트리밍 일시 중지
     mediaStreamHandler.setCmd("PAUSE");
     isAlive = false;
 }
 
-// TEARDOWN 핸들
 void RequestHandler::handleTeardownRequest(int clientSocket, int cseq, ClientSession* session) {
     session->setState("TEARDOWN");
 
@@ -205,6 +205,5 @@ void RequestHandler::handleTeardownRequest(int clientSocket, int cseq, ClientSes
 
     SOCK.sendRTSPResponse(clientSocket, response);
 
-    // 세션 종료 로직
     mediaStreamHandler.setCmd("TEARDOWN");
 }
